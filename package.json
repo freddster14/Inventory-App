@@ -1,0 +1,29 @@
+{
+  "name": "inventory-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freddster14/Inventory-App.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/freddster14/Inventory-App/issues"
+  },
+  "homepage": "https://github.com/freddster14/Inventory-App#readme",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "path": "^0.12.7",
+    "pg": "^8.16.1",
+    "serve-favicon": "^2.5.1"
+  }
+}
