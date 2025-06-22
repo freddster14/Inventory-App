@@ -9,12 +9,14 @@
   <h1><%= category.name %></h1>
   <ul>
     <% items.forEach(item => { %>
-      <li class="item">
-        <h2><%= item.name %></h2>
-        <p><%= item.description %></p>
-        <p><%= item.info %></p>
-        <p><%= item.quantity %></p>
-      </li>
+      <a href="/item/?id=<%= item.id %>">
+        <li class="item">
+          <h2><%= item.name %></h2>
+          <p><%= item.description %></p>
+          <p><%= item.info %></p>
+          <p><%= item.quantity %></p>
+        </li>
+      </a>
     <% }) %>
   </ul>
 </body>
