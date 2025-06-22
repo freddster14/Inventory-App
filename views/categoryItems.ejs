@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= category.name %></title>
+</head>
+<body>
+  <h1><%= category.name %></h1>
+  <ul>
+    <% items.forEach(item => { %>
+      <li class="item">
+        <h2><%= item.name %></h2>
+        <p><%= item.description %></p>
+        <p><%= item.info %></p>
+        <p><%= item.quantity %></p>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>
