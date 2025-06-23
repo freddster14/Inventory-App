@@ -1,7 +1,7 @@
 const db = require('../models/queries');
 
 exports.getItem = async (req, res) => {
-  const { id } = req.query;
+  const { id } = req.params;
   const item = await db.getItem(id);
   res.render('item', { item });
 };
@@ -12,6 +12,5 @@ exports.getItemForm = (req, res) => {
 
 exports.postItem = async (req, res) => {
   const categoryId = await db.searchCategory(req.body.category);
-  console.log(categoryId);
   res.redirect(`/category/${categoryId}`);
 };

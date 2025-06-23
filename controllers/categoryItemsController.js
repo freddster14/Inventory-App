@@ -11,32 +11,69 @@ const validationForm = [
     .toLowerCase(),
 ];
 exports.getItems = async (req, res) => {
-  const { id } = req.query;
+  console.log('ran')
+  const { id } = req.params;
   const category = await db.getCategory(id);
   const items = await db.getCategoryItems(category.id);
-  res.render('categoryItems', { category, items });
+  res.render('category/categoryItems', { category, items, id });
 };
 
 exports.getForm = (req, res) => {
-  res.render('categoryForm', { errors: [] });
+  res.render('category/categoryForm', { errors: [] });
 };
+
+exports.getUpdateForm = async (req, res) => {
+  const { id } = req.params;
+  const category = await db.getCategory(id);
+  res.render('category/categoryEdit', { category, errors: [] });
+};
+
+exports.updateCategory = [
+  validationForm,
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).render('category/categoryForm', {
+        errors: errors.array(),
+      });
+    }
+    const { id } = req.params;
+    const newCategory = req.body.category;
+    const capitalizeCat = newCategory.charAt(0).toUpperCase() + newCategory.slice(1);
+    try {
+      await db.updateCategory(id, capitalizeCat);
+      return res.redirect(`/category/${id}`);
+    } catch (error) {
+      // Express dupe error code
+      if (error.code === '23505') {
+        const category = await db.getCategory(id);
+        return res.render('category/categoryEdit', { category, errors: [{ msg: `Category (${newCategory}) already exist.` }] });
+      }
+      // Handle other errors
+      return res.status(500).render('category/categoryEdit', { category: { id, name: newCategory }, errors: [{ msg: 'An unexpected error occurred.' }] });
+    }
+  },
+];
 
 exports.postCategory = [
   validationForm,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).render('categoryForm', {
+      return res.status(400).render('category/categoryForm', {
         errors: errors.array(),
       });
     }
     const { category } = req.body;
     const capitalizeCat = category.charAt(0).toUpperCase() + category.slice(1);
-    const isCategoryNew = await db.searchCategories(capitalizeCat);
-    if (!isCategoryNew) {
-      return res.status(400).render('categoryForm', { errors: [{ msg: 'Category already exists.' }] });
+    try {
+      await db.postCategory(capitalizeCat);
+      return res.redirect('/');
+    } catch (error) {
+      if (error.code === '23505') {
+        return res.render('category/categoryForm', { errors: [{ msg: 'Category already exists.' }] });
+      }
     }
-    await db.postCategory(capitalizeCat);
-    return res.redirect('/');
+    return res.status(500).render('category/categoryEdit', { category, errors: [{ msg: 'An unexpected error occurred.' }] });
   },
 ];

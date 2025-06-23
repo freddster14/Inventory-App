@@ -20,13 +20,10 @@ exports.getItem = async (id) => {
   return rows[0];
 };
 
-exports.searchCategories = async (category) => {
-  const { rows } = await pool.query('SELECT * FROM categories WHERE name LIKE $1', [`%${category}%`]);
-  console.log(rows)
-  if (rows.length !== 0) return false;
-  return true;
-};
-
 exports.postCategory = async (category) => {
   await pool.query('INSERT INTO categories (name) VALUES ($1)', [category]);
+};
+
+exports.updateCategory = async (id, category) => {
+  await pool.query('UPDATE categories SET name=$1 WHERE id=$2', [category, id]);
 };

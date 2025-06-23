@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Category</title>
+</head>
+<body>
+  <form action="/category/edit/<%= category.id %>" method="post">
+    <label for="category">Category Name:</label>
+    <input type="text" name="category" id="category" value="<%= category.name %>">
+    <ul>
+      <% errors.forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+    <button type="submit">UPDATE CATEGORY</button>
+  </form>
+</body>
+</html>
