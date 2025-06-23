@@ -9,3 +9,9 @@ exports.getItem = async (req, res) => {
 exports.getItemForm = (req, res) => {
   res.render('itemForm');
 };
+
+exports.postItem = async (req, res) => {
+  const categoryId = await db.searchCategory(req.body.category);
+  console.log(categoryId);
+  res.redirect(`/category/${categoryId}`);
+};
