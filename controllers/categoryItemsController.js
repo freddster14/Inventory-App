@@ -11,7 +11,6 @@ const validationForm = [
     .toLowerCase(),
 ];
 exports.getItems = async (req, res) => {
-  console.log('ran')
   const { id } = req.params;
   const category = await db.getCategory(id);
   const items = await db.getCategoryItems(category.id);

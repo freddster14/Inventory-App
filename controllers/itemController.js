@@ -6,11 +6,18 @@ exports.getItem = async (req, res) => {
   res.render('item', { item });
 };
 
-exports.getItemForm = (req, res) => {
-  res.render('itemForm');
+exports.getItemForm = async (req, res) => {
+  const categories = await db.getCategories();
+  res.render('itemForm', { categories });
 };
 
 exports.postItem = async (req, res) => {
-  const categoryId = await db.searchCategory(req.body.category);
-  res.redirect(`/category/${categoryId}`);
+  const {
+    catId,
+    name,
+    info,
+    quantity,
+  } = req.body;
+  await db.postItem(catId, name, info, quantity);
+  res.redirect(`/category/${catId}`);
 };

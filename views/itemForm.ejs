@@ -10,7 +10,11 @@
   <form action="/item/new" method="post">
     <h1>Create Item:</h1>
     <label for="category">Category:</label>
-    <input type="text" name="category" id="category">
+    <div class="dropdown">
+      <input type="hidden" name="catId" id="catId">
+      <input class="form-control"  id="myInput" type="text" oninput="filterCategories()" placeholder="Search..">
+      <ul class="list"></ul>
+    </div>
     <label for="name">Name:</label>
     <input type="text" name="name" id="name">
     <label for="info">Info:</label>
@@ -19,5 +23,28 @@
     <input type="number" name="quantity" id="quantity">
     <button type="submit">ADD ITEM</button>
   </form>
+  <script>
+    const categories = <%- JSON.stringify(categories) %>;
+    const list = document.querySelector('.list');
+    const appendCategories = (filtered) => {
+      filtered.forEach(category => {
+        const li = document.createElement('li');
+        li.textContent = category.name;
+        li.addEventListener('click', () => {
+          document.getElementById('myInput').value = category.name;
+          document.getElementById('catId').value = category.id;
+          list.innerHTML = '';
+        })
+        list.appendChild(li);
+      });
+    };
+    const filterCategories = () => {
+      const searchInput = document.getElementById('myInput').value.toLowerCase();
+      if (searchInput === '') return list.innerHTML = '';
+      const filtered = categories.filter(category => category.name.toLowerCase().includes(searchInput));
+      list.innerHTML = '';
+      appendCategories(filtered);
+    };
+  </script>
 </body>
 </html>
