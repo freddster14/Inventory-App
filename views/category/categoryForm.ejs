@@ -13,11 +13,6 @@
     <input type="text" name="category" id="category">
     <button type="submit">ADD CATEGORY</button>
   </form>
-  <ul>
-    <% errors.forEach(error => { %>
-      <li><%= error.msg %></li>
-    <% })%>
-  </ul>
-
+  <%- include('../errors', { errors }); %>
 </body>
 </html>

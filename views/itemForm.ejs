@@ -9,10 +9,11 @@
   <%- include('topbar'); %>
   <form action="/item/new" method="post">
     <h1>Create Item:</h1>
+    <%- include('errors', { errors }); %>
     <label for="category">Category:</label>
     <div class="dropdown">
       <input type="hidden" name="catId" id="catId">
-      <input class="form-control"  id="myInput" type="text" oninput="filterCategories()" placeholder="Search..">
+      <input class="form-control" name="category" id="myInput" type="text" oninput="filterCategories()" placeholder="Search..">
       <ul class="list"></ul>
     </div>
     <label for="name">Name:</label>
@@ -20,7 +21,7 @@
     <label for="info">Info:</label>
     <input type="text" name="info" id="info">
     <label for="quantity">Quantity:</label>
-    <input type="number" name="quantity" id="quantity">
+    <input type="number" name="quantity" id="quantity" placeholder="Default 1">
     <button type="submit">ADD ITEM</button>
   </form>
   <script>
@@ -40,6 +41,7 @@
     };
     const filterCategories = () => {
       const searchInput = document.getElementById('myInput').value.toLowerCase();
+      document.getElementById('catId').value = '';
       if (searchInput === '') return list.innerHTML = '';
       const filtered = categories.filter(category => category.name.toLowerCase().includes(searchInput));
       list.innerHTML = '';
