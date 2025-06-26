@@ -32,6 +32,20 @@ const validationForm = [
     .withMessage('Quantity must only contain number.'),
 ];
 
+const validationUpdateForm = [
+  body('info')
+    .trim()
+    .optional({ values: 'falsy' })
+    .matches(/^[\w\s-]+$/)
+    .withMessage('Info must contain only letters or numbers.')
+    .toLowerCase(),
+  body('quantity')
+    .trim()
+    .optional({ values: 'falsy' })
+    .isNumeric()
+    .withMessage('Quantity must only contain number.'),
+];
+
 exports.getItem = async (req, res) => {
   const { id } = req.params;
   const item = await db.getItem(id);
@@ -43,12 +57,23 @@ exports.getItemForm = async (req, res) => {
   res.render('item/form', { categories, errors: [] });
 };
 
+exports.getUpdateForm = async (req, res) => {
+  const { id } = req.params;
+  const item = await db.getItem(id);
+  const category = await db.getCategory(item.cat_id);
+  res.render('item/edit', {
+    item,
+    category,
+    errors: [],
+  });
+};
+
 exports.postItem = [
   validationForm,
   async (req, res) => {
     const errors = validationResult(req);
-    const categories = await db.getCategories();
     if (!errors.isEmpty()) {
+      const categories = await db.getCategories();
       return res.status(400).render('item/form', {
         categories,
         errors: errors.array(),
@@ -64,33 +89,41 @@ exports.postItem = [
       await db.postItem(catId, name, info, quantity);
       return res.redirect(`/category/${catId}`);
     } catch (error) {
+      const categories = await db.getCategories();
       return res.render('item/form', { categories, errors: [{ msg: 'An unexpected error occured.' }] });
     }
   },
 ];
 
 exports.updateItem = [
-  validationForm,
+  validationUpdateForm,
   async (req, res) => {
     const errors = validationResult(req);
-    const categories = await db.getCategories();
-    if (!errors.isEmpty()) {
-      return res.status(400).render('item/edit', {
-        categories,
-        errors: errors.array(),
-      });
-    }
+    const { id } = req.params;
     const {
       catId,
-      name,
+      category,
       info,
       quantity,
     } = req.body;
+    const sameCat = { id: catId, name: category };
+    const item = await db.getItem(id);
+    if (!errors.isEmpty()) {
+      return res.status(400).render('item/edit', {
+        item,
+        category: sameCat,
+        errors: errors.array(),
+      });
+    }
     try {
-      await db.updateItem(catId, name, info, quantity);
-      return res.redirect(`/category/${catId}`);
+      await db.updateItem(item, info, quantity);
+      return res.redirect(`/item/${item.id}`);
     } catch (error) {
-      return res.render('item/edit', { categories, errors: [{ msg: 'An unexpected error occured.' }] });
+      return res.render('item/edit', {
+        item,
+        category: sameCat,
+        errors: [{ msg: 'An unexpected error occured.' }],
+      });
     }
   },
 ];

@@ -20,12 +20,12 @@ exports.getItem = async (id) => {
   return rows[0];
 };
 
-exports.postItem = async (catId, name, info, quantinty) => {
-  await pool.query('INSERT INTO items (cat_id, name, info, quantity) VALUES ($1, $2, $3, $4)', [catId, name, info, quantinty]);
+exports.postItem = async (catId, name, info, quantity) => {
+  await pool.query('INSERT INTO items (cat_id, name, info, quantity) VALUES ($1, $2, $3, $4)', [catId, name, info, quantity]);
 };
 
-exports.updateItem = async (catId, name, info, quantinty) => {
-  await pool.query('UPDATE items SET cat_id=$1, name=$2 info=$3 quantity=$4 WHERE id=$2', [catId, name, info, quantinty]);
+exports.updateItem = async (item, info, quantity) => {
+  await pool.query('UPDATE items SET info=$2, quantity=$3 WHERE id=$1', [item.id, info, quantity]);
 };
 
 exports.postCategory = async (category) => {
