@@ -14,17 +14,17 @@ exports.getItems = async (req, res) => {
   const { id } = req.params;
   const category = await db.getCategory(id);
   const items = await db.getCategoryItems(category.id);
-  res.render('category/categoryItems', { category, items, id });
+  res.render('category/view', { category, items, id });
 };
 
 exports.getForm = (req, res) => {
-  res.render('category/categoryForm', { errors: [] });
+  res.render('category/form', { errors: [] });
 };
 
 exports.getUpdateForm = async (req, res) => {
   const { id } = req.params;
   const category = await db.getCategory(id);
-  res.render('category/categoryEdit', { category, errors: [] });
+  res.render('category/edit', { category, errors: [] });
 };
 
 exports.updateCategory = [
@@ -32,7 +32,7 @@ exports.updateCategory = [
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).render('category/categoryForm', {
+      return res.status(400).render('category/form', {
         errors: errors.array(),
       });
     }
@@ -45,10 +45,10 @@ exports.updateCategory = [
       // Express dupe error code
       if (error.code === '23505') {
         const category = await db.getCategory(id);
-        return res.render('category/categoryEdit', { category, errors: [{ msg: `Category (${newCategory}) already exist.` }] });
+        return res.render('category/edit', { category, errors: [{ msg: `Category (${newCategory}) already exist.` }] });
       }
       // Handle other errors
-      return res.status(500).render('category/categoryEdit', { category: { id, name: newCategory }, errors: [{ msg: 'An unexpected error occurred.' }] });
+      return res.status(500).render('category/edit', { category: { id, name: newCategory }, errors: [{ msg: 'An unexpected error occurred.' }] });
     }
   },
 ];
@@ -58,7 +58,7 @@ exports.postCategory = [
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).render('category/categoryForm', {
+      return res.status(400).render('category/form', {
         errors: errors.array(),
       });
     }
@@ -68,9 +68,9 @@ exports.postCategory = [
       return res.redirect('/');
     } catch (error) {
       if (error.code === '23505') {
-        return res.render('category/categoryForm', { errors: [{ msg: 'Category already exists.' }] });
+        return res.render('category/form', { errors: [{ msg: 'Category already exists.' }] });
       }
     }
-    return res.status(500).render('category/categoryEdit', { category, errors: [{ msg: 'An unexpected error occurred.' }] });
+    return res.status(500).render('category/form', { category, errors: [{ msg: 'An unexpected error occurred.' }] });
   },
 ];
