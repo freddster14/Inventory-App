@@ -1,29 +1,29 @@
-const db = require('../models/queries');
 const { body, validationResult } = require('express-validator');
+const db = require('../models/queries');
 
 const validationForm = [
   body('category')
+    .toLowerCase()
     .trim()
-    .notEmpty()
-    .withMessage('Category cannot be empty.'),
-  body('cat_id')
-    .trim()
-    .if(body('category').notEmpty())
     .notEmpty()
     .withMessage('Category does not exist, create new one.'),
+  body('catId')
+    .if((value, { req }) => value === 'missing click')
+    .isEmpty()
+    .withMessage('Select a category from list.'),
   body('name')
     .trim()
     .notEmpty()
     .withMessage('Name cannot be empty.')
     .bail()
-    .isAlpha()
-    .withMessage('Name must contain only letter.')
+    .matches(/^[\w\s-]+$/)
+    .withMessage('Name must contain only letters, numbers or dashes.')
     .toLowerCase(),
   body('info')
     .trim()
     .optional({ values: 'falsy' })
-    .isAlpha()
-    .withMessage('Info must contain only letter.')
+    .matches(/^[\w\s-]+$/)
+    .withMessage('Info must contain only letters or numbers.')
     .toLowerCase(),
   body('quantity')
     .trim()
@@ -48,8 +48,12 @@ exports.postItem = [
   async (req, res) => {
     const errors = validationResult(req);
     const categories = await db.getCategories();
+    console.log(errors);
     if (!errors.isEmpty()) {
-      return res.status(400).render('itemForm', { categories, errors: errors.array() });
+      return res.status(400).render('itemForm', {
+        categories,
+        errors: errors.array(),
+      });
     }
     const {
       catId,

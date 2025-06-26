@@ -25,9 +25,11 @@ exports.postItem = async (catId, name, info, quantinty) => {
 };
 
 exports.postCategory = async (category) => {
-  await pool.query('INSERT INTO categories (name) VALUES ($1)', [category]);
+  const capitalizeCat = category.charAt(0).toUpperCase() + category.slice(1);
+  await pool.query('INSERT INTO categories (name) VALUES ($1)', [capitalizeCat]);
 };
 
 exports.updateCategory = async (id, category) => {
-  await pool.query('UPDATE categories SET name=$1 WHERE id=$2', [category, id]);
+  const capitalizeCat = category.charAt(0).toUpperCase() + category.slice(1);
+  await pool.query('UPDATE categories SET name=$1 WHERE id=$2', [capitalizeCat, id]);
 };

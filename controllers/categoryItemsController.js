@@ -38,9 +38,8 @@ exports.updateCategory = [
     }
     const { id } = req.params;
     const newCategory = req.body.category;
-    const capitalizeCat = newCategory.charAt(0).toUpperCase() + newCategory.slice(1);
     try {
-      await db.updateCategory(id, capitalizeCat);
+      await db.updateCategory(id, newCategory);
       return res.redirect(`/category/${id}`);
     } catch (error) {
       // Express dupe error code
@@ -64,9 +63,8 @@ exports.postCategory = [
       });
     }
     const { category } = req.body;
-    const capitalizeCat = category.charAt(0).toUpperCase() + category.slice(1);
     try {
-      await db.postCategory(capitalizeCat);
+      await db.postCategory(category);
       return res.redirect('/');
     } catch (error) {
       if (error.code === '23505') {
