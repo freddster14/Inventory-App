@@ -5,6 +5,7 @@ const itemRouter = Router();
 
 itemRouter.get('/new', itemController.getItemForm);
 itemRouter.post('/new', itemController.postItem);
+itemRouter.get('/edit/:id', itemController.updateItem);
 itemRouter.get('/:id', itemController.getItem);
 
 module.exports = itemRouter;

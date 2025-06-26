@@ -35,12 +35,12 @@ const validationForm = [
 exports.getItem = async (req, res) => {
   const { id } = req.params;
   const item = await db.getItem(id);
-  res.render('item', { item });
+  res.render('item/view', { item });
 };
 
 exports.getItemForm = async (req, res) => {
   const categories = await db.getCategories();
-  res.render('itemForm', { categories, errors: [] });
+  res.render('item/form', { categories, errors: [] });
 };
 
 exports.postItem = [
@@ -48,9 +48,8 @@ exports.postItem = [
   async (req, res) => {
     const errors = validationResult(req);
     const categories = await db.getCategories();
-    console.log(errors);
     if (!errors.isEmpty()) {
-      return res.status(400).render('itemForm', {
+      return res.status(400).render('item/form', {
         categories,
         errors: errors.array(),
       });
@@ -65,7 +64,33 @@ exports.postItem = [
       await db.postItem(catId, name, info, quantity);
       return res.redirect(`/category/${catId}`);
     } catch (error) {
-      return res.render('itemForm', { categories, errors: [{ msg: 'An unexpected error occured.' }] });
+      return res.render('item/form', { categories, errors: [{ msg: 'An unexpected error occured.' }] });
+    }
+  },
+];
+
+exports.updateItem = [
+  validationForm,
+  async (req, res) => {
+    const errors = validationResult(req);
+    const categories = await db.getCategories();
+    if (!errors.isEmpty()) {
+      return res.status(400).render('item/edit', {
+        categories,
+        errors: errors.array(),
+      });
+    }
+    const {
+      catId,
+      name,
+      info,
+      quantity,
+    } = req.body;
+    try {
+      await db.updateItem(catId, name, info, quantity);
+      return res.redirect(`/category/${catId}`);
+    } catch (error) {
+      return res.render('item/edit', { categories, errors: [{ msg: 'An unexpected error occured.' }] });
     }
   },
 ];

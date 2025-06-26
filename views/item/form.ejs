@@ -6,10 +6,10 @@
   <title>New Item</title>
 </head>
 <body>
-  <%- include('topbar'); %>
+  <%- include('../topbar'); %>
   <form action="/item/new" method="post">
     <h1>Create Item:</h1>
-    <%- include('errors', { errors }); %>
+    <%- include('../errors', { errors }); %>
     <label for="category">*Category:</label>
     <div class="dropdown">
       <input type="hidden" name="catId" id="catId">

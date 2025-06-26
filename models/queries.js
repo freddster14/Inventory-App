@@ -24,6 +24,10 @@ exports.postItem = async (catId, name, info, quantinty) => {
   await pool.query('INSERT INTO items (cat_id, name, info, quantity) VALUES ($1, $2, $3, $4)', [catId, name, info, quantinty]);
 };
 
+exports.updateItem = async (catId, name, info, quantinty) => {
+  await pool.query('UPDATE items SET cat_id=$1, name=$2 info=$3 quantity=$4 WHERE id=$2', [catId, name, info, quantinty]);
+};
+
 exports.postCategory = async (category) => {
   const capitalizeCat = category.charAt(0).toUpperCase() + category.slice(1);
   await pool.query('INSERT INTO categories (name) VALUES ($1)', [capitalizeCat]);
