@@ -1,7 +1,7 @@
 const pool = require('./pool');
 
 exports.getCategories = async () => {
-  const { rows } = await pool.query('SELECT * FROM categories');
+  const { rows } = await pool.query('SELECT * FROM categories WHERE id>0');
   return rows;
 };
 
@@ -36,4 +36,8 @@ exports.postCategory = async (category) => {
 exports.updateCategory = async (id, category) => {
   const capitalizeCat = category.charAt(0).toUpperCase() + category.slice(1);
   await pool.query('UPDATE categories SET name=$1 WHERE id=$2', [capitalizeCat, id]);
+};
+
+exports.deleteCategory = async (id) => {
+  await pool.query('DELETE FROM categories WHERE id=$1', [id]);
 };

@@ -27,6 +27,13 @@ exports.getUpdateForm = async (req, res) => {
   res.render('category/edit', { category, errors: [] });
 };
 
+exports.getDelete = async (req, res) => {
+  const { id } = req.params;
+  const category = await db.getCategory(id);
+  const items = await db.getCategoryItems(category.id);
+  res.render('category/delete', { category, length: items.length });
+};
+
 exports.updateCategory = [
   validationForm,
   async (req, res) => {
@@ -74,3 +81,9 @@ exports.postCategory = [
     return res.status(500).render('category/form', { category, errors: [{ msg: 'An unexpected error occurred.' }] });
   },
 ];
+
+exports.deleteCategory = async (req, res) => {
+  const { id } = req.params;
+  await db.deleteCategory(id);
+  res.redirect('/');
+};

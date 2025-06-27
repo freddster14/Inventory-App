@@ -11,7 +11,7 @@
     <label for="category">Category Name:</label>
     <input type="text" name="category" id="category" value="<%= category.name %>">
     <div>
-      <a href="/category/delete">DELETE CATEGORY</a>
+      <a href="/category/delete/<%= category.id %>">DELETE CATEGORY</a>
       <button type="submit">UPDATE CATEGORY</button>
     </div>
   </form>

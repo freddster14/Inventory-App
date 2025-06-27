@@ -13,6 +13,9 @@
       <a href="/category/edit/<%= id %>" style="font-size: 2em;">✍️</a>
     <% } %>
   </div>
+  <% if (category.id === 0) { %>
+    <p>Assign items to their respected categories in order to edit their content.</p>
+  <% } %>
   <ul>
     <% items.forEach(item => { %>
       <a href="/item/<%= item.id %>">

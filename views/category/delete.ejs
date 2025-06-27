@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete</title>
+</head>
+<body>
+  <%- include('../topbar'); %>
+  <form action="/category/delete/<%= category.id %>" method="post">
+    <h1><%= category.name %></h1>
+    <p>Deleting this category will move all of the <span><%= length %></span> item(s) inside it to "No Category".
+    </p>
+    <button type="submit">DELETE FOREVER</button>
+  </form>
+</body>
+</html>
