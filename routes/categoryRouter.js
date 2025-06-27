@@ -9,6 +9,7 @@ categoryRouter.get('/edit/:id', categoryController.getUpdateForm);
 categoryRouter.post('/edit/:id', categoryController.updateCategory);
 categoryRouter.get('/delete/:id', categoryController.getDelete);
 categoryRouter.post('/delete/:id', categoryController.deleteCategory);
+categoryRouter.get('/0', categoryController.getNoCategoryItems);
 categoryRouter.get('/:id', categoryController.getItems);
 
 module.exports = categoryRouter;

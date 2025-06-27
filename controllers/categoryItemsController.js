@@ -17,6 +17,12 @@ exports.getItems = async (req, res) => {
   res.render('category/view', { category, items, id });
 };
 
+exports.getNoCategoryItems = async (req, res) => {
+  const items = await db.getCategoryItems(0);
+  const categories = await db.getCategories();
+  res.render('category/noCategory', { categories, items, errors: [] });
+};
+
 exports.getForm = (req, res) => {
   res.render('category/form', { errors: [] });
 };

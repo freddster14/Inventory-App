@@ -3,27 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New Item</title>
+  <title>No Category</title>
 </head>
 <body>
   <%- include('../topbar'); %>
-  <form action="/item/new" method="post">
-    <h1>Create Item:</h1>
-    <%- include('../errors', { errors }); %>
-    <label for="category">*Category:</label>
-    <div class="dropdown">
-      <input type="hidden" name="catId" id="catId">
-      <input class="form-control" name="category" id="myInput" type="text" oninput="filterCategories()" placeholder="Search..">
-      <ul class="list"></ul>
-    </div>
-    <label for="name">*Name:</label>
-    <input type="text" name="name" id="name">
-    <label for="info">Info:</label>
-    <input type="text" name="info" id="info">
-    <label for="quantity">Quantity:</label>
-    <input type="number" name="quantity" id="quantity" value="1">
-    <button id="submit" type="submit">ADD ITEM</button>
-  </form>
+  <h1>No Category</h1>
+  <p>Assign items to their respected categories in order to edit their content.</p>
+  <ul>
+    <% items.forEach(item => { %>
+        <li class="item" style="display: flex; justify-content: space-between;">
+          <div>
+            <h2><%= item.name %></h2>
+            <p><%= item.description %></p>
+            <p><%= item.info %></p>
+            <p><%= item.quantity %></p>
+          </div>
+          <form action="/item/move/<%= item.id %>" method="post">
+            <h3>Select a Category:</h3>
+            <%- include('../errors', { errors }); %>
+            <div class="dropdown">
+              <input type="hidden" name="catId" id="catId">
+              <input class="form-control" name="category" id="myInput" type="text" oninput="filterCategories()"
+                placeholder="Search..">
+              <ul class="list"></ul>  
+              <button type="submit">Add Category</button>
+            </div>
+          </form>
+        </li>
+    <% }) %>
+  </ul>
   <script>
     const categories = <%- JSON.stringify(categories) %>;
     const list = document.querySelector('.list');
