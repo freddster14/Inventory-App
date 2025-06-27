@@ -7,7 +7,10 @@
 </head>
 <body>
   <%- include('topbar'); %>
-  <h1>Categories</h1>
+  <div>
+    <h1>Categories</h1>
+    <a href="/category/0">No Category</a>
+  </div>
   <ul>
     <% categories.forEach( category => { %>
       <li>

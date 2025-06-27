@@ -10,7 +10,10 @@
   <form action="/category/edit/<%= category.id %>" method="post">
     <label for="category">Category Name:</label>
     <input type="text" name="category" id="category" value="<%= category.name %>">
-    <button type="submit">UPDATE CATEGORY</button>
+    <div>
+      <a href="/category/delete">DELETE CATEGORY</a>
+      <button type="submit">UPDATE CATEGORY</button>
+    </div>
   </form>
 </body>
 </html>
