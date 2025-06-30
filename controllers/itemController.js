@@ -16,6 +16,10 @@ const validationForm = [
     .matches(/^[\w\s-]+$/)
     .withMessage('Info must contain only letters or numbers.')
     .toLowerCase(),
+  body('price')
+    .trim()
+    .isNumeric()
+    .withMessage('Price must only contain number.'),
   body('quantity')
     .trim()
     .optional({ values: 'falsy' })
@@ -30,6 +34,10 @@ const validationUpdateForm = [
     .matches(/^[\w\s-]+$/)
     .withMessage('Info must contain only letters or numbers.')
     .toLowerCase(),
+  body('price')
+    .trim()
+    .isNumeric()
+    .withMessage('Price must only contain number.'),
   body('quantity')
     .trim()
     .optional({ values: 'falsy' })
@@ -107,10 +115,11 @@ exports.postItem = [
       catId,
       name,
       info,
+      price,
       quantity,
     } = req.body;
     try {
-      await db.postItem(catId, name, info, quantity);
+      await db.postItem(catId, name, info, price, quantity);
       return res.redirect(`/category/${catId}`);
     } catch (error) {
       const categories = await db.getCategories(-1);
@@ -128,6 +137,7 @@ exports.updateItem = [
       catId,
       category,
       info,
+      price,
       quantity,
     } = req.body;
     const sameCat = { id: catId, name: category };
@@ -140,7 +150,7 @@ exports.updateItem = [
       });
     }
     try {
-      await db.updateItem(item, info, quantity);
+      await db.updateItem(item, info, price, quantity);
       return res.redirect(`/item/${item.id}`);
     } catch (error) {
       return res.render('item/edit', {

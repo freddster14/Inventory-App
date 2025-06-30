@@ -14,8 +14,7 @@
         <li class="item" style="display: flex; justify-content: space-between;">
           <div>
             <h2><%= item.name %></h2>
-            <p><%= item.description %></p>
-            <p><%= item.info %></p>
+            <p><%= item.price %></p>
             <p><%= item.quantity %></p>
           </div>
           <form action="/item/move/<%= item.id %>" method="post">

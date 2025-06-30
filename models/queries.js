@@ -1,6 +1,6 @@
 const pool = require('./pool');
 
-exports.getCategories = async (limit = 0) => {
+exports.getCategories = async (limit = 1) => {
   const { rows } = await pool.query('SELECT * FROM categories WHERE id>$1', [limit]);
   return rows;
 };
@@ -20,12 +20,12 @@ exports.getItem = async (id) => {
   return rows[0];
 };
 
-exports.postItem = async (catId, name, info, quantity) => {
-  await pool.query('INSERT INTO items (cat_id, name, info, quantity) VALUES ($1, $2, $3, $4)', [catId, name, info, quantity]);
+exports.postItem = async (catId, name, info, price, quantity) => {
+  await pool.query('INSERT INTO items (cat_id, name, info, price, quantity) VALUES ($1, $2, $3, $4, $5)', [catId, name, info, price, quantity]);
 };
 
-exports.updateItem = async (item, info, quantity) => {
-  await pool.query('UPDATE items SET info=$2, quantity=$3 WHERE id=$1', [item.id, info, quantity]);
+exports.updateItem = async (item, info, price, quantity) => {
+  await pool.query('UPDATE items SET info=$2, price=$3, quantity=$3 WHERE id=$1', [item.id, info, price, quantity]);
 };
 
 exports.moveItem = async (catId, id) => {
