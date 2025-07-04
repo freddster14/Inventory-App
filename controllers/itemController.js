@@ -1,61 +1,6 @@
-const { body, validationResult } = require('express-validator');
 const db = require('../models/queries');
-
-const validationForm = [
-  body('name')
-    .trim()
-    .notEmpty()
-    .withMessage('Name cannot be empty.')
-    .bail()
-    .matches(/^[\w\s-]+$/)
-    .withMessage('Name must contain only letters, numbers or dashes.')
-    .toLowerCase(),
-  body('info')
-    .trim()
-    .optional({ values: 'falsy' })
-    .matches(/^[\w\s-]+$/)
-    .withMessage('Info must contain only letters or numbers.')
-    .toLowerCase(),
-  body('price')
-    .trim()
-    .isNumeric()
-    .withMessage('Price must only contain number.'),
-  body('quantity')
-    .trim()
-    .optional({ values: 'falsy' })
-    .isNumeric()
-    .withMessage('Quantity must only contain number.'),
-];
-
-const validationUpdateForm = [
-  body('info')
-    .trim()
-    .optional({ values: 'falsy' })
-    .matches(/^[\w\s-]+$/)
-    .withMessage('Info must contain only letters or numbers.')
-    .toLowerCase(),
-  body('price')
-    .trim()
-    .isNumeric()
-    .withMessage('Price must only contain number.'),
-  body('quantity')
-    .trim()
-    .optional({ values: 'falsy' })
-    .isNumeric()
-    .withMessage('Quantity must only contain number.'),
-];
-
-const validateCategory = [
-  body('category')
-    .toLowerCase()
-    .trim()
-    .notEmpty()
-    .withMessage('Category does not exist, create new one.'),
-  body('catId')
-    .if((value, { req }) => value === 'missing click')
-    .isEmpty()
-    .withMessage('Select a category from list.'),
-];
+const { validationResult } = require('express-validator');
+const { validateCategory, validateInfo, validateName } = require('../models/validators');
 
 exports.getItem = async (req, res) => {
   const { id } = req.params;
@@ -64,7 +9,7 @@ exports.getItem = async (req, res) => {
 };
 
 exports.getItemForm = async (req, res) => {
-  const categories = await db.getCategories(-1);
+  const categories = await db.getCategories();
   res.render('item/form', { categories, errors: [] });
 };
 
@@ -101,11 +46,12 @@ exports.moveItem = [
 
 exports.postItem = [
   validateCategory,
-  validationForm,
+  validateName,
+  validateInfo,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      const categories = await db.getCategories(-1);
+      const categories = await db.getCategories();
       return res.status(400).render('item/form', {
         categories,
         errors: errors.array(),
@@ -122,14 +68,14 @@ exports.postItem = [
       await db.postItem(catId, name, info, price, quantity);
       return res.redirect(`/category/${catId}`);
     } catch (error) {
-      const categories = await db.getCategories(-1);
+      const categories = await db.getCategories();
       return res.render('item/form', { categories, errors: [{ msg: 'An unexpected error occured.' }] });
     }
   },
 ];
 
 exports.updateItem = [
-  validationUpdateForm,
+  validateInfo,
   async (req, res) => {
     const errors = validationResult(req);
     const { id } = req.params;
@@ -153,6 +99,7 @@ exports.updateItem = [
       await db.updateItem(item, info, price, quantity);
       return res.redirect(`/item/${item.id}`);
     } catch (error) {
+      console.error(error)
       return res.render('item/edit', {
         item,
         category: sameCat,

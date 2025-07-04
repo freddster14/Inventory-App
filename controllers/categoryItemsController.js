@@ -1,15 +1,7 @@
-const { body, validationResult } = require('express-validator');
 const db = require('../models/queries');
+const { validationResult } = require('express-validator');
+const { validateName } = require('../models/validators');
 
-const validationForm = [
-  body('category')
-    .trim()
-    .notEmpty()
-    .withMessage('Name cannot be empty.')
-    .isAlpha()
-    .withMessage('Name must contain only letter.')
-    .toLowerCase(),
-];
 exports.getItems = async (req, res) => {
   const { id } = req.params;
   const category = await db.getCategory(id);
@@ -41,7 +33,7 @@ exports.getDelete = async (req, res) => {
 };
 
 exports.updateCategory = [
-  validationForm,
+  validateName,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -67,7 +59,7 @@ exports.updateCategory = [
 ];
 
 exports.postCategory = [
-  validationForm,
+  validateName,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
