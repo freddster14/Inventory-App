@@ -7,12 +7,16 @@
 </head>
 <body>
   <%- include('../topbar'); %>
-  <div style="display: flex; align-items: center;">
-    <h1><%= category.name %></h1>
-    <% if (category.id !== 0) { %>
-      <a href="/category/edit/<%= id %>" style="font-size: 2em;">✍️</a>
-    <% } %>
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <div style="display: flex; align-items: center;">
+      <h1><%= category.name %></h1>
+      <% if (category.id !== 0) { %>
+        <a href="/category/edit/<%= id %>" style="font-size: 2em;">✍️</a>
+      <% } %>
+    </div>
+    <a href="/item/new/<%= category.id %>">Add To Category</a>
   </div>
+ 
   <% if (category.id === 0) { %>
     <p>Assign items to their respected categories in order to edit their content.</p>
   <% } %>
