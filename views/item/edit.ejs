@@ -24,6 +24,7 @@
         <input type="number" name="price" id="price" step="0.01" value="<%= item.price %>" min="1">
         <label for="quantity">Quantity:</label>
         <input type="number" name="quantity" id="quantity" value="<%= item.quantity %>">
+        <a href="/item/delete/<%= item.id %>">DELETE ITEM</a>
         <button id="submit" type="submit">UPDATE ITEM</button>
     </form>
 </body>

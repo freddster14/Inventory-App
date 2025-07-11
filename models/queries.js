@@ -45,3 +45,7 @@ exports.updateCategory = async (id, category) => {
 exports.deleteCategory = async (id) => {
   await pool.query('DELETE FROM categories WHERE id=$1', [id]);
 };
+
+exports.deleteItem = async (id) => {
+  await pool.query('DELETE FROM items WHERE id=$1', [id]);
+};

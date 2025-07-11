@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete</title>
+</head>
+<body>
+  <%- include('../topbar'); %>
+    <form action="/item/delete/<%= item.id %>" method="post">
+      <h1>
+        <%=item.name %>
+      </h1>
+      <div>
+        <p><%= item.info %></p>
+        <p><%= item.price %></p>
+        <p><%= item.quantity %></p>
+      </div>
+      <p>Are you sure you want to remove this item?</p>
+      <button type="submit">DELETE FOREVER</button>
+    </form>
+</body>
+
+</html>

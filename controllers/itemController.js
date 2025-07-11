@@ -29,6 +29,19 @@ exports.getUpdateForm = async (req, res) => {
   });
 };
 
+exports.getDelete = async (req, res) => {
+  const { id } = req.params;
+  const item = await db.getItem(id);
+  res.render('item/delete', { item });
+};
+
+exports.deleteItem = async (req, res) => {
+  const { id } = req.params;
+  const item = await db.getItem(id);
+  await db.deleteItem(id);
+  res.redirect(`/category/${item.cat_id}`);
+};
+
 exports.moveItem = [
   validateCategory,
   async (req, res) => {
@@ -128,3 +141,5 @@ exports.updateItem = [
     }
   },
 ];
+
+
