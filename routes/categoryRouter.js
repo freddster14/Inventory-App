@@ -11,5 +11,6 @@ categoryRouter.get('/delete/:id', categoryController.getDelete);
 categoryRouter.post('/delete/:id', categoryController.deleteCategory);
 categoryRouter.get('/0', categoryController.getNoCategoryItems);
 categoryRouter.get('/:id', categoryController.getItems);
+categoryRouter.get('/', categoryController.getCategories)
 
 module.exports = categoryRouter;

@@ -1,20 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> <%= item.name %></title>
-</head>
-  <body>
-    <%- include('../topbar'); %>
-    <div style="display: flex; align-items: center;">
-      <h1>
-        <%= item.name %>
-      </h1>
-      <a href="/item/edit/<%= item.id %>" style="font-size: 2em;">✍️</a>
-      </div>
-    <p><%= item.info %></p>
-    <p><%= item.price %></p>
-    <p><%= item.quantity %></p>
-  </body>
-</html>
+<body>
+  <div style="display: flex; align-items: center;">
+    <h1>
+      <%= item.name %>
+    </h1>
+    <a href="/item/edit/<%= item.id %>" style="font-size: 2em;">✍️</a>
+    </div>
+  <p><%= item.info %></p>
+  <p><%= item.price %></p>
+  <p><%= item.quantity %></p>
+</body>
