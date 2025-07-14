@@ -13,5 +13,6 @@ itemRouter.post('/move/:id', itemController.moveItem);
 itemRouter.get('/delete/:id', itemController.getDelete);
 itemRouter.post('/delete/:id', itemController.deleteItem);
 itemRouter.get('/:id', itemController.getItem);
+itemRouter.get('/', itemController.getItems);
 
 module.exports = itemRouter;

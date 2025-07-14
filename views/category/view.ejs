@@ -12,12 +12,10 @@
 <% } %>
 <ul>
   <% items.forEach(item => { %>
-    <a href="/item/<%= item.id %>">
-      <li class="item">
-        <p><%= item.name %></p>
-        <p><%= item.price %></p>
-        <p><%= item.quantity %></p>
-      </li>
-    </a>
+    <li class="item">
+      <a href="/item/<%= item.id %>"><%= item.name %></a>
+      <p><%= item.price %></p>
+      <p><%= item.quantity %></p>
+    </li>
   <% }) %>
 </ul>

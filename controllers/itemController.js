@@ -2,6 +2,12 @@ const db = require('../models/queries');
 const { validationResult } = require('express-validator');
 const { validateCategory, validateInfo, validateName } = require('../models/validators');
 
+exports.getItems = async (req, res) => {
+  const { id } = req.params;
+  const items = await db.getItems();
+  res.render('item/default', { items });
+};
+
 exports.getItem = async (req, res) => {
   const { id } = req.params;
   const item = await db.getItem(id);

@@ -1,0 +1,10 @@
+<h1>Inventory</h1>
+<ul>
+  <% items.forEach( item => { %>
+  <li>
+    <a href="/item/<%= item.id %>"><%= item.name %></a>
+    <p><%= item.price %></p>
+    <p><%= item.quantity %></p>
+  </li>
+  <% })%>
+</ul>
