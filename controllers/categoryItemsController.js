@@ -15,7 +15,7 @@ exports.getItems = async (req, res) => {
 };
 
 exports.getNoCategoryItems = async (req, res) => {
-  const items = await db.getCategoryItems(0);
+  const items = await db.getCategoryItems(1);
   const categories = await db.getCategories();
   res.render('category/noCategory', { categories, items, errors: [] });
 };

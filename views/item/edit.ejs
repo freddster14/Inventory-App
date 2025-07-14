@@ -1,31 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New Item</title>
-</head>
-<body>
-  <%- include('../topbar'); %>
-    <form action="/item/edit/<%= item.id %>" method="post">
-      <h1>Edit Item:</h1>
-      <%- include('../errors', { errors }); %>
-        <label for="category">To edit create new:</label>
-        <div class="dropdown">
-          <input type="hidden" name="catId" id="catId" value="<%= category.id %>">
-          <input name="category" id="myInput" type="text" value="<%= category.name %>" hidden>
-          <input  value="<%= category.name %>" disabled>
-        </div>
-        <label for="name">To edit create new:</label>
-        <input type="text" name="name" id="name" value="<%= item.name %>" disabled>
-        <label for="info">Info:</label>
-        <input type="text" name="info" id="info" value="<%= item.info %>">
-        <label for="price">Price:</label>
-        <input type="number" name="price" id="price" step="0.01" value="<%= item.price %>" min="1">
-        <label for="quantity">Quantity:</label>
-        <input type="number" name="quantity" id="quantity" value="<%= item.quantity %>">
-        <a href="/item/delete/<%= item.id %>">DELETE ITEM</a>
-        <button id="submit" type="submit">UPDATE ITEM</button>
-    </form>
-</body>
-</html>
+<form action="/item/edit/<%= item.id %>" method="post">
+  <h1>Edit Item:</h1>
+  <%- include('../errors', { errors }); %>
+    <label for="category">To edit create new:</label>
+    <div class="dropdown">
+      <input type="hidden" name="catId" id="catId" value="<%= category.id %>">
+      <input name="category" id="myInput" type="text" value="<%= category.name %>" hidden>
+      <input  value="<%= category.name %>" disabled>
+    </div>
+    <label for="name">To edit create new:</label>
+    <input type="text" name="name" id="name" value="<%= item.name %>" disabled>
+    <label for="info">Info:</label>
+    <input type="text" name="info" id="info" value="<%= item.info %>">
+    <label for="price">Price:</label>
+    <input type="number" name="price" id="price" step="0.01" value="<%= item.price %>" min="1">
+    <label for="quantity">Quantity:</label>
+    <input type="number" name="quantity" id="quantity" value="<%= item.quantity %>">
+    <a href="/item/delete/<%= item.id %>">DELETE ITEM</a>
+    <button id="submit" type="submit">UPDATE ITEM</button>
+</form>

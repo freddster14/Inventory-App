@@ -1,71 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>No Category</title>
-</head>
-<body>
-  <%- include('../topbar'); %>
-  <h1>No Category</h1>
-  <p>Assign items to their respected categories in order to edit their content.</p>
-  <ul>
-    <% items.forEach(item => { %>
-        <li class="item" style="display: flex; justify-content: space-between;">
-          <div>
-            <h2><%= item.name %></h2>
-            <p><%= item.price %></p>
-            <p><%= item.quantity %></p>
+<h1>No Category</h1>
+<p>Assign items to their respected categories in order to edit their content.</p>
+<ul>
+  <% items.forEach(item => { %>
+      <li class="item" style="display: flex; justify-content: space-between;">
+        <div>
+          <h2><%= item.name %></h2>
+          <p><%= item.price %></p>
+          <p><%= item.quantity %></p>
+        </div>
+        <form action="/item/move/<%= item.id %>" method="post">
+          <h3>Select a Category:</h3>
+          <%- include('../errors', { errors }); %>
+          <div class="dropdown">
+            <input type="hidden" name="catId" id="catId">
+            <input class="form-control" name="category" id="myInput" type="text" oninput="filterCategories()"
+              placeholder="Search.." autocomplete="off">
+            <ul class="list"></ul>  
+            <button type="submit">Add Category</button>
           </div>
-          <form action="/item/move/<%= item.id %>" method="post">
-            <h3>Select a Category:</h3>
-            <%- include('../errors', { errors }); %>
-            <div class="dropdown">
-              <input type="hidden" name="catId" id="catId">
-              <input class="form-control" name="category" id="myInput" type="text" oninput="filterCategories()"
-                placeholder="Search..">
-              <ul class="list"></ul>  
-              <button type="submit">Add Category</button>
-            </div>
-          </form>
-        </li>
-    <% }) %>
-  </ul>
-  <script>
-    const categories = <%- JSON.stringify(categories) %>;
-    const list = document.querySelector('.list');
-    document.querySelector('form').addEventListener('submit', (e) => {
-      const catId = document.querySelector('#catId');
-      if (!catId.value && list.childElementCount > 0) {
-        catId.value = 'missing click';
-      }
+        </form>
+      </li>
+  <% }) %>
+</ul>
+<script>
+  const categories = <%- JSON.stringify(categories) %>;
+  const list = document.querySelector('.list');
+  document.querySelector('form').addEventListener('submit', (e) => {
+    const catId = document.querySelector('#catId');
+    if (!catId.value && list.childElementCount > 0) {
+      catId.value = 'missing click';
+    }
+  });
+  const appendCategories = (filtered) => {
+    filtered.forEach(category => {
+      const li = document.createElement('li');
+      li.textContent = category.name;
+      li.addEventListener('click', () => {
+        document.getElementById('myInput').value = category.name;
+        document.getElementById('catId').value = category.id;
+        list.innerHTML = '';
+      })
+      list.appendChild(li);
     });
-    const appendCategories = (filtered) => {
-      filtered.forEach(category => {
-        const li = document.createElement('li');
-        li.textContent = category.name;
-        li.addEventListener('click', () => {
-          document.getElementById('myInput').value = category.name;
-          document.getElementById('catId').value = category.id;
-          list.innerHTML = '';
-        })
-        list.appendChild(li);
-      });
-    };
-    const filterCategories = () => {
-      const searchInput = document.getElementById('myInput').value.toLowerCase();
-      document.getElementById('catId').value = '';
-      if (searchInput === '') return list.innerHTML = '';
-      const filtered = categories.filter(category => category.name.toLowerCase().includes(searchInput));
-      list.innerHTML = '';
-      if (filtered.length === 0) {
-        const li = document.createElement('li');
-        li.textContent = 'No category exists, create a new one';
-        list.appendChild(li);
-        return;
-      }
-      appendCategories(filtered);
-    };
-  </script>
-</body>
-</html>
+  };
+  const filterCategories = () => {
+    const searchInput = document.getElementById('myInput').value.toLowerCase();
+    document.getElementById('catId').value = '';
+    if (searchInput === '') return list.innerHTML = '';
+    const filtered = categories.filter(category => category.name.toLowerCase().includes(searchInput));
+    list.innerHTML = '';
+    if (filtered.length === 0) {
+      const li = document.createElement('li');
+      li.textContent = 'No category exists, create a new one';
+      list.appendChild(li);
+      return;
+    }
+    appendCategories(filtered);
+  };
+</script>
