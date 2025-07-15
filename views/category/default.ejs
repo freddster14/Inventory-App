@@ -1,7 +1,23 @@
-<ul>
+<h1>Categories</h1>
+<ul style="
+  display: flex;
+  gap: 10px;
+  width: 95%;
+  flex-direction: column;
+  padding-left: 10px;
+">
   <% categories.forEach( category => { %>
-    <li>
-      <a href="category/<%= category.id %>"><%= category.name%></a>
+    <li style="
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    ">
+      <a href="category/<%= category.id %>" ><%= category.name%></a>
+      <div>
+        <a href="category/edit/<%= category.id %>">Edit</a>
+        <a href="category/delete/<%= category.id %>">Delete</a>
+      </div>
     </li>
   <% }) %>
 </ul>

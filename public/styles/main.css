@@ -20,6 +20,9 @@ a:hover {
 .content {
   display: grid;
   grid-template-columns: 100px 1fr;
-  grid-template-rows: 1fr;
+  grid-template-rows: 100px 1fr;
   gap: 15px;
+}
+h1 {
+  margin-top: 0;
 }

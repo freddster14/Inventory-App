@@ -15,7 +15,7 @@ exports.getCategoryItems = async (categoryId) => {
   return rows;
 };
 
-exports.getItems = async (limit = 12) => {
+exports.getItems = async (limit = 10) => {
   const { rows } = await pool.query('SELECT * FROM items LIMIT $1', [limit]);
   return rows;
 };
