@@ -1,21 +1,27 @@
-<div style="display: flex; justify-content: space-between; align-items: center;">
-  <div style="display: flex; align-items: center;">
-    <h1><%= category.name %></h1>
-    <% if (category.id !== 0) { %>
-      <a href="/category/edit/<%= id %>" style="font-size: 2em;">✍️</a>
-    <% } %>
-  </div>
+<div class="header">
+  <h1 style="margin: 0;"><%= category.name %></h1>
   <a href="/item/new/<%= category.id %>">Add To Category</a>
 </div>
 <% if (category.id === 0) { %>
   <p>Assign items to their respected categories in order to edit their content.</p>
+<% } else { %>
+  <div class="items-grid" style="padding: 0px 10px;" >
+    <p>Name</p>
+    <p>Price</p>
+    <p>Available</p>
+    <p style="margin-left: auto;">Actions</p>
+  </div>
 <% } %>
-<ul>
+<ul class="list">
   <% items.forEach(item => { %>
-    <li class="item">
-      <a href="/item/<%= item.id %>"><%= item.name %></a>
-      <p><%= item.price %></p>
-      <p><%= item.quantity %></p>
+    <li class="items-grid">
+        <a href="/item/<%= item.id %>"  ><%= item.name %></a>
+        <p><%= item.price %></p>
+        <p><%= item.quantity %></p>
+      <div style="margin-left: auto;">
+        <a href="/item/edit/<%= item.id %>">Edit</a>
+        <a href="/item/delete/<%= item.id %>">Delete</a>
+      </div>
     </li>
   <% }) %>
 </ul>

@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=TikTok+Sans:opsz,wght@12..36,300..900&display=swap');
 
-body {
+body,html {
   margin: 0;
   padding: 0;
   font-family: 'TikTok Sans', sans-serif;
+  height: 100%;
 }
 
 a {
@@ -11,18 +12,78 @@ a {
   text-decoration: none;
   border-radius: 10px;
   padding: 3px 5px;
+  width: fit-content;
 }
 
 a:hover {
   background-color: gray;
 }
 
+h1 {
+  margin-top: 0;
+}
+
 .content {
   display: grid;
   grid-template-columns: 100px 1fr;
-  grid-template-rows: 100px 1fr;
+  grid-template-rows: 100px auto;
   gap: 15px;
+  height: calc(100% - 57px);
 }
-h1 {
-  margin-top: 0;
+
+.sidebar {
+  grid-column: 1;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  margin-top: 11px;
+}
+
+.body {
+  grid-column: 2;
+  grid-row: 1/-1;
+  background-color: rgb(233, 233, 233);
+  padding: 15px;
+  
+}
+
+.start {
+  position: absolute;
+  left: 60%;
+  top: 40%;
+  width: 60%;
+  transform: translate(-50%, -50%);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.list {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 10px;
+  margin: 0;
+  background-color: rgb(255, 255, 255);
+}
+
+.items {
+  list-style: none;
+  display: flex;
+  padding: 10px 0px;
+  align-items: center;
+}
+
+.items-grid {
+  list-style: none;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 25% 20% 20% auto;
 }

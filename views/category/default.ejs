@@ -1,18 +1,7 @@
 <h1>Categories</h1>
-<ul style="
-  display: flex;
-  gap: 10px;
-  width: 95%;
-  flex-direction: column;
-  padding-left: 10px;
-">
+<ul class="list">
   <% categories.forEach( category => { %>
-    <li style="
-      list-style: none;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    ">
+    <li style="justify-content: space-between;" class="items">
       <a href="category/<%= category.id %>" ><%= category.name%></a>
       <div>
         <a href="category/edit/<%= category.id %>">Edit</a>
