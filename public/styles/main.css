@@ -87,3 +87,19 @@ h1 {
   align-items: center;
   grid-template-columns: 25% 20% 20% auto;
 }
+
+.search-list {
+  position: absolute;
+  background-color: white;
+  list-style-type: none;
+  padding: 0px;
+  width: 185px;
+  box-shadow: 0px 5px 22px 0px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0px 5px 22px 0px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0px 5px 22px 0px rgba(0, 0, 0, 0.4);
+}
+
+.search-list li {
+  padding: 5px 10px;
+  
+}

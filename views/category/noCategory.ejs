@@ -1,21 +1,24 @@
 <h1>No Category</h1>
 <p>Assign items to their respected categories in order to edit their content.</p>
-<ul>
+<div class="items-grid" style="padding: 0px 14px;">
+  <p>Name</p>
+  <p>Price</p>
+  <p>Available</p>
+  <p style="margin-left: auto;">Select a Category</p>
+</div>
+<ul class="list">
   <% items.forEach(item => { %>
-      <li class="item" style="display: flex; justify-content: space-between;">
-        <div>
-          <h2><%= item.name %></h2>
-          <p><%= item.price %></p>
-          <p><%= item.quantity %></p>
-        </div>
-        <form action="/item/move/<%= item.id %>" method="post">
-          <h3>Select a Category:</h3>
+      <li class="items-grid">
+        <p><%= item.name %></p>
+        <p><%= item.price %></p>
+        <p><%= item.quantity %></p>
+        <form action="/item/move/<%= item.id %>" method="post" style="margin-left: auto;">
           <%- include('../errors', { errors }); %>
           <div class="dropdown">
             <input type="hidden" name="catId" id="catId">
-            <input class="form-control" name="category" id="myInput" type="text" oninput="filterCategories()"
+            <input  name="category" id="myInput" type="text" oninput="filterCategories()"
               placeholder="Search.." autocomplete="off">
-            <ul class="list"></ul>  
+            <ul class="search-list"></ul>  
             <button type="submit">Add Category</button>
           </div>
         </form>
@@ -24,7 +27,7 @@
 </ul>
 <script>
   const categories = <%- JSON.stringify(categories) %>;
-  const list = document.querySelector('.list');
+  const list = document.querySelector('.search-list');
   document.querySelector('form').addEventListener('submit', (e) => {
     const catId = document.querySelector('#catId');
     if (!catId.value && list.childElementCount > 0) {
