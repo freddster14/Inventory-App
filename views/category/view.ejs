@@ -9,7 +9,7 @@
     <p>Name</p>
     <p>Price</p>
     <p>Available</p>
-    <p style="margin-left: auto;">Actions</p>
+    <p style="grid-column: 4/-1; margin-left: auto;">Actions</p>
   </div>
 <% } %>
 <ul class="list">
@@ -18,7 +18,7 @@
         <a href="/item/<%= item.id %>"  ><%= item.name %></a>
         <p><%= item.price %></p>
         <p><%= item.quantity %></p>
-      <div style="margin-left: auto;">
+      <div style="grid-column: 4/-1; margin-left: auto;">
         <a href="/item/edit/<%= item.id %>">Edit</a>
         <a href="/item/delete/<%= item.id %>">Delete</a>
       </div>

@@ -7,14 +7,31 @@
   <p>Name</p>
   <p>Price</p>
   <p>Available</p>
+  <p>Active</p>
   <p style="margin-left: auto;">Actions</p>
 </div>
 <ul class="list">
   <% items.forEach( item => { %>
   <li class="items-grid">
-    <a href="/item/<%= item.id %>"><%= item.name %></a>
+    <% if(item.cat_id===1) { %>
+      <a href="/category/1">
+        <%= item.name %>
+      </a>
+
+      <% } else { %>
+        <a href="/item/<%= item.id %>">
+          <%= item.name %>
+        </a>
+
+        <% } %>
     <p><%= item.price %></p>
     <p><%= item.quantity %></p>
+    <p><% if(item.cat_id === 1) { %>
+      No
+      <% } else { %>
+        Yes
+      <% } %>
+    </p>
     <div style="margin-left: auto;">
       <a href="/item/edit/<%= item.id %>">Edit</a>
       <a href="/item/delete/<%= item.id %>">Delete</a>

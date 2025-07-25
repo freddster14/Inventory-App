@@ -85,7 +85,7 @@ h1 {
   list-style: none;
   display: grid;
   align-items: center;
-  grid-template-columns: 25% 20% 20% auto;
+  grid-template-columns: 38% 18% 16% 10% auto;
 }
 
 .search-list {
