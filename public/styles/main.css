@@ -80,6 +80,10 @@ h1 {
   background-color: var(--link-background);
 }
 
+.action-box {
+  font-size: 1.6em;
+}
+
 .list {
   display: flex;
   flex-direction: column;

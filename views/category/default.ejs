@@ -3,7 +3,7 @@
   <% categories.forEach( category => { %>
     <li style="justify-content: space-between;" class="items">
       <a href="category/<%= category.id %>" ><%= category.name%></a>
-      <div>
+      <div class="action-box">
         <a href="category/edit/<%= category.id %>">✍️</a>
         <a href="category/delete/<%= category.id %>">🗑️</a>
       </div>
