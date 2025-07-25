@@ -1,6 +1,6 @@
 <div class="header">
   <h1 style="margin: 0;"><%= category.name %></h1>
-  <a href="/item/new/<%= category.id %>">Add To Category</a>
+  <a href="/item/new/<%= category.id %>">➕ New Item</a>
 </div>
 <% if (category.id === 0) { %>
   <p>Assign items to their respected categories in order to edit their content.</p>
@@ -19,8 +19,8 @@
         <p><%= item.price %></p>
         <p><%= item.quantity %></p>
       <div style="grid-column: 4/-1; margin-left: auto;">
-        <a href="/item/edit/<%= item.id %>">Edit</a>
-        <a href="/item/delete/<%= item.id %>">Delete</a>
+        <a href="/item/edit/<%= item.id %>">✍️</a>
+        <a href="/item/delete/<%= item.id %>">🗑️</a>
       </div>
     </li>
   <% }) %>

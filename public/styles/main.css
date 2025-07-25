@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=TikTok+Sans:opsz,wght@12..36,300..900&display=swap');
 
+:root {
+  --link-background: gray;
+}
+
 body,html {
   margin: 0;
   padding: 0;
@@ -16,7 +20,7 @@ a {
 }
 
 a:hover {
-  background-color: gray;
+  background-color: var(--link-background);
 }
 
 h1 {
@@ -65,6 +69,16 @@ h1 {
   align-items: center;
 }
 
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5em;
+  padding: 10px 8px;
+}
+
+.active-link {
+  background-color: var(--link-background);
+}
 
 .list {
   display: flex;

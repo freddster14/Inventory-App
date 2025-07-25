@@ -1,9 +1,14 @@
-<div style="display: flex; align-items: center;">
+<div style="display: flex; justify-content: space-between;">
   <h1>
     <%= item.name %>
   </h1>
-  <a href="/item/edit/<%= item.id %>" style="font-size: 2em;">✍️</a>
+  <div>
+    <a href="/item/edit/<%= item.id %>" style="font-size: 2em;">✍️</a>
+    <a href="/item/delete/<%= item.id %>" style="font-size: 2em;">🗑️</a>
+  </div>
+ 
 </div>
-<p><%= item.info %></p>
-<p><%= item.price %></p>
-<p><%= item.quantity %></p>
+<p>Category: <a href="/category/<%= category.id %>"><%= category.name %></a></p>
+<p>Information: <%= item.info %></p>
+<p>Price: $<%= item.price %></p>
+<p>Available: <%= item.quantity %></p>

@@ -11,7 +11,8 @@ exports.getItems = async (req, res) => {
 exports.getItem = async (req, res) => {
   const { id } = req.params;
   const item = await db.getItem(id);
-  res.render('item/view', { item });
+  const category = await db.getCategory(item.cat_id)
+  res.render('item/view', { item, category });
 };
 
 exports.getItemForm = async (req, res) => {

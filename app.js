@@ -13,6 +13,12 @@ const assestsPath = path.join(__dirname, '/public/styles');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// Middleware to make the current URL available
+app.use((req, res, next) => {
+  res.locals.currentUrl = req.originalUrl;
+  next();
+});
+
 app.use(expressLayouts);
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(express.static(assestsPath));
