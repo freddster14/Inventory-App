@@ -1,9 +1,9 @@
 <h1>Create Category</h1>
 <form action="/category/new" method="post" class="form-box">
   <div>
-    <label for="category">Name:</label>
+    <label for="category"><span style="color: red;">*</span>Name:</label>
     <input type="text" name="name" id="category" placeholder="Ex. Footwear, Electronics, Toys, etc...">
-    <button type="submit">ADD CATEGORY</button>
+    <button type="submit" class="add-update-btn">ADD CATEGORY</button>
   </div>
 </form>
 <%- include('../errors', { errors }); %>

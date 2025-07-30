@@ -40,14 +40,17 @@ exports.getDelete = async (req, res) => {
 exports.updateCategory = [
   validateName,
   async (req, res) => {
+    const { id } = req.params;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).render('category/form', {
+      const category = await db.getCategory(id);
+      return res.status(400).render('category/edit', {
+        category,
         errors: errors.array(),
       });
     }
-    const { id } = req.params;
-    const newCategory = req.body.category;
+
+    const newCategory = req.body.name;
     try {
       await db.updateCategory(id, newCategory);
       return res.redirect(`/category/${id}`);

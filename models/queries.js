@@ -44,6 +44,7 @@ exports.postCategory = async (category) => {
 
 exports.updateCategory = async (id, category) => {
   const capitalizeCat = category.charAt(0).toUpperCase() + category.slice(1);
+  console.log(capitalizeCat)
   await pool.query('UPDATE categories SET name=$1 WHERE id=$2', [capitalizeCat, id]);
 };
 

@@ -1,8 +1,12 @@
-<form action="/category/edit/<%= category.id %>" method="post">
-  <label for="category">Category Name:</label>
-  <input type="text" name="category" id="category" value="<%= category.name %>">
+<h1>Edit Category</h1>
+<form action="/category/edit/<%= category.id %>" method="post" class="form-box">
   <div>
-    <a href="/category/delete/<%= category.id %>">DELETE CATEGORY</a>
-    <button type="submit">UPDATE CATEGORY</button>
+    <label for="category"><span style="color: red;">*</span>Name:</label>
+    <input type="text" name="name" id="category" value="<%= category.name %>">
+    <div style="flex-direction: row; justify-content: space-between;">
+      <a href="/category/delete/<%= category.id %>" class="delete-btn">DELETE CATEGORY</a>
+      <button type="submit" class="add-update-btn">UPDATE CATEGORY</button>
+    </div>
   </div>
 </form>
+<%- include('../errors', { errors }); %>

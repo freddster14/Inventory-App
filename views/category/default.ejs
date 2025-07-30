@@ -2,7 +2,11 @@
   <h1>Categories</h1>
   <a href="/category/new">➕ New Category</a>
 </div>
-
+<div class="items-grid header-row">
+  <p>Name</p>
+  
+  <p style="grid-column: 4/-1; margin-left: auto;">Actions</p>
+</div>
 <ul class="list">
   <% categories.forEach((category, i) => { %>
     <li style="justify-content: space-between;" class="<%= i === categories.length - 1 ? 'items' : 'items seperator' %>">
