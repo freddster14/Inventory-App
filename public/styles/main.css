@@ -23,16 +23,12 @@ a:hover {
   background-color: var(--link-background);
 }
 
-h1 {
-  margin-top: 0;
-}
 
 .content {
   display: grid;
-  grid-template-columns: 100px 1fr;
+  grid-template-columns: 150px 1fr;
   grid-template-rows: 100px auto;
-  gap: 15px;
-  height: calc(100% - 57px);
+  height: 100%;
 }
 
 .sidebar {
@@ -44,7 +40,13 @@ h1 {
   flex-direction: column;
   gap: 10px;
   align-items: center;
-  margin-top: 11px;
+  margin-top: 25px;
+  font-size: 1.1em;
+}
+
+.sidebar p {
+  font-size: 1.2em;
+  margin: 10px 0px;
 }
 
 .body {
@@ -69,12 +71,6 @@ h1 {
   align-items: center;
 }
 
-.top-bar {
-  display: flex;
-  justify-content: space-between;
-  font-size: 1.5em;
-  padding: 10px 8px;
-}
 
 .active-link {
   background-color: var(--link-background);
