@@ -3,7 +3,10 @@
   <div>
     <label for="category"><span style="color: red;">*</span>Name:</label>
     <input type="text" name="name" id="category" placeholder="Ex. Footwear, Electronics, Toys, etc...">
-    <button type="submit" class="add-update-btn">ADD CATEGORY</button>
+    <div style="flex-direction: row; justify-content: space-between;">
+      <button class="cancel-btn"  type="button" onclick="history.back()">CANCEL</button>
+      <button type="submit"  class="add-update-btn">ADD CATEGORY</button>
+    </div>
   </div>
 </form>
 <%- include('../errors', { errors }); %>

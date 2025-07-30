@@ -4,7 +4,7 @@
     <label for="category"><span style="color: red;">*</span>Name:</label>
     <input type="text" name="name" id="category" value="<%= category.name %>">
     <div style="flex-direction: row; justify-content: space-between;">
-      <a href="/category/delete/<%= category.id %>" class="delete-btn">DELETE CATEGORY</a>
+      <button class="cancel-btn" type="button" onclick="history.back()">CANCEL</button>
       <button type="submit" class="add-update-btn">UPDATE CATEGORY</button>
     </div>
   </div>

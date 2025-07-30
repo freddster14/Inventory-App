@@ -124,6 +124,7 @@ a:hover {
   list-style-type: none;
   padding: 0px;
   width: 185px;
+  z-index: 1;
   box-shadow: 0px 5px 22px 0px rgba(0, 0, 0, 0.4);
   -webkit-box-shadow: 0px 5px 22px 0px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 0px 5px 22px 0px rgba(0, 0, 0, 0.4);
@@ -164,6 +165,8 @@ a:hover {
   border: none;
   padding: 7px;
   font-weight: bold;
+  width: 50%;
+  text-align: center;
 }
 
 .add-update-btn {
@@ -184,7 +187,6 @@ a:hover {
 
 .cancel-btn {
   background-color: var(--link-background);
-  width: 170px;
 }
 
 .cancel-btn:hover {
