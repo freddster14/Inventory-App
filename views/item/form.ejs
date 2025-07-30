@@ -1,29 +1,35 @@
-<form action="/item/new" method="post">
-  <h1>Create Item:</h1>
-  <%- include('../errors', { errors }); %>
-  <label for="category">*Category:</label>
-  <% if (selectedCategory) { %>
-    <input type="hidden" name="catId" value="<%= selectedCategory.id %>">
-    <input type="hidden" name="category" value="<%= selectedCategory.name %>">
-    <input type="text" value="<%= selectedCategory.name %>" disabled>
-    <% } else { %>
-    <div class="dropdown">
-      <input type="hidden" name="catId" id="catId">
-      <input name="category" type="text" oninput="filterCategories()" placeholder="Search.." autocomplete="off">
-      <ul class="list"></ul>
+<h1>Create Item:</h1>
+<form action="/item/new" method="post" class="form-box">
+  <div>
+    <label for="category">Category:</label>
+    <% if (selectedCategory) { %>
+      <input type="hidden" name="catId" value="<%= selectedCategory.id %>">
+      <input type="hidden" name="category" value="<%= selectedCategory.name %>">
+      <input type="text" value="<%= selectedCategory.name %>" disabled>
+      <% } else { %>
+      <div class="dropdown">
+        <input type="hidden" name="catId" id="catId">
+        <input name="category" type="text" oninput="filterCategories()" placeholder="Search.." autocomplete="off">
+        <ul class="list"></ul>
+      </div>
+    <% } %>
+    
+    <label for="name"><span style="color: red;">*</span>Name:</label>
+    <input type="text" name="name" id="name">
+    <label for="info">Info:</label>
+    <input type="text" name="info" id="info">
+    <label for="price"><span style="color: red;">*</span>Price ($):</label>
+    <input type="number" step="0.01" name="price" id="price" min="0">
+    <label for="quantity">Quantity:</label>
+    <input type="number" name="quantity" id="quantity" value="1">
+    <div style="flex-direction: row; justify-content: space-between;">
+      <button class="cancel-btn" type="button" onclick="history.back()">CANCEL</button>
+      <button id="submit" class="add-update-btn" type="submit">ADD ITEM</button>
     </div>
-  <% } %>
-  
-  <label for="name">*Name:</label>
-  <input type="text" name="name" id="name">
-  <label for="info">Info:</label>
-  <input type="text" name="info" id="info">
-  <label for="price">*Price:</label>
-  <input type="number" step="0.01" name="price" id="price" min="0">
-  <label for="quantity">Quantity:</label>
-  <input type="number" name="quantity" id="quantity" value="1">
-  <button id="submit" type="submit">ADD ITEM</button>
+  </div>
+ 
 </form>
+<%- include('../errors', { errors }); %>
 <script>
   const categories = <%- JSON.stringify(categories) %>;
   const list = document.querySelector('.list');
