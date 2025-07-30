@@ -2,7 +2,7 @@
   <h1>Inventory</h1>
   <a href="/item/new">➕ New Item</a>
 </div>
-<div class="items-grid" style="padding: 0px 14px;">
+<div class="items-grid header-row">
   <p>Name</p>
   <p>Price</p>
   <p>Available</p>
@@ -10,8 +10,8 @@
   <p style="margin-left: auto;">Actions</p>
 </div>
 <ul class="list">
-  <% items.forEach( item => { %>
-  <li class="items-grid">
+  <% items.forEach((item, i) => { %>
+  <li class="<%= i === items.length - 1 ? 'items-grid' : 'items-grid seperator'%>">
     <% if(item.cat_id===1) { %>
       <a href="/category/1">
         <%= item.name %>

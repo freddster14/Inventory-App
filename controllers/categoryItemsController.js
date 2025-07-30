@@ -72,21 +72,21 @@ exports.postCategory = [
         errors: errors.array(),
       });
     }
-    const { category } = req.body;
+    const { name } = req.body;
     try {
-      await db.postCategory(category);
-      return res.redirect('/');
+      await db.postCategory(name);
+      return res.redirect('/category');
     } catch (error) {
       if (error.code === '23505') {
         return res.render('category/form', { errors: [{ msg: 'Category already exists.' }] });
       }
     }
-    return res.status(500).render('category/form', { category, errors: [{ msg: 'An unexpected error occurred.' }] });
+    return res.status(500).render('category/form', { name, errors: [{ msg: 'An unexpected error occurred.' }] });
   },
 ];
 
 exports.deleteCategory = async (req, res) => {
   const { id } = req.params;
   await db.deleteCategory(id);
-  res.redirect('/');
+  res.redirect('/category');
 };

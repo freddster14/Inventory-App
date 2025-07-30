@@ -1,11 +1,11 @@
 <div class="header">
-  <h1 style="margin: 0;"><%= category.name %></h1>
+  <h1><%= category.name %></h1>
   <a href="/item/new/<%= category.id %>">➕ New Item</a>
 </div>
 <% if (category.id === 0) { %>
   <p>Assign items to their respected categories in order to edit their content.</p>
 <% } else { %>
-  <div class="items-grid" style="padding: 0px 14px;" >
+  <div class="items-grid header-row">
     <p>Name</p>
     <p>Price</p>
     <p>Available</p>
@@ -13,8 +13,8 @@
   </div>
 <% } %>
 <ul class="list">
-  <% items.forEach(item => { %>
-    <li class="items-grid">
+  <% items.forEach((item, i) => { %>
+    <li class="<%= i === items.length - 1 ? 'items-grid' : 'items-grid seperator'%>">
         <a href="/item/<%= item.id %>"  ><%= item.name %></a>
         <p><%= item.price %></p>
         <p><%= item.quantity %></p>

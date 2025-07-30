@@ -2,6 +2,8 @@
 
 :root {
   --link-background: gray;
+  --box-background: white;
+  --body-backgorund: rgb(233, 233, 233);
 }
 
 body,html {
@@ -52,8 +54,8 @@ a:hover {
 .body {
   grid-column: 2;
   grid-row: 1/-1;
-  background-color: rgb(233, 233, 233);
-  padding: 15px;
+  background-color: var(--body-backgorund);
+  padding: 0px 15px;
   
 }
 
@@ -85,8 +87,9 @@ a:hover {
   flex-direction: column;
   padding: 0px 10px;
   margin: 0;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--box-background);
 }
+
 
 .items {
   list-style: none;
@@ -95,6 +98,7 @@ a:hover {
   align-items: center;
 }
 
+
 .items-grid {
   list-style: none;
   display: grid;
@@ -102,9 +106,19 @@ a:hover {
   grid-template-columns: 38% 18% 16% 10% auto;
 }
 
+.seperator {
+  border-bottom: 1px solid gray;
+}
+
+.header-row {
+  padding: 0px 14px;
+  background-color: var(--box-background);
+  border-bottom: 1px solid var(--body-backgorund);
+}
+
 .search-list {
   position: absolute;
-  background-color: white;
+  background-color: var(--box-background);
   list-style-type: none;
   padding: 0px;
   width: 185px;
@@ -116,4 +130,31 @@ a:hover {
 .search-list li {
   padding: 5px 10px;
   
+}
+
+.form-box {
+  background-color: var(--box-background);
+  padding: 10px;
+  font-size: 1.2em;
+}
+
+.form-box div {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 50%;
+}
+
+.form-box button {
+  font-size: 0.9em;
+  background-color: var(--body-backgorund);
+  border-radius: 10px;
+  border: 1px solid black;
+  padding: 7px;
+}
+
+.error-list {
+  list-style: none;
+  padding: 0px 10px;
+  color: red;
 }
