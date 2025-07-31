@@ -11,7 +11,7 @@ exports.getItems = async (req, res) => {
 exports.getItem = async (req, res) => {
   const { id } = req.params;
   const item = await db.getItem(id);
-  const category = await db.getCategory(item.cat_id)
+  const category = await db.getCategory(item.cat_id);
   res.render('item/view', { item, category });
 };
 
@@ -39,7 +39,8 @@ exports.getUpdateForm = async (req, res) => {
 exports.getDelete = async (req, res) => {
   const { id } = req.params;
   const item = await db.getItem(id);
-  res.render('item/delete', { item });
+  const category = await db.getCategory(item.cat_id);
+  res.render('item/delete', { item, category });
 };
 
 exports.deleteItem = async (req, res) => {

@@ -1,20 +1,24 @@
-<form action="/item/edit/<%= item.id %>" method="post">
-  <h1>Edit Item:</h1>
-  <%- include('../errors', { errors }); %>
-    <label for="category">To edit create new:</label>
+<h1>Edit Item:</h1>
+<form action="/item/edit/<%= item.id %>" method="post" class="form-box">
+  <div>
+    <label for="category">Category:</label>
     <div class="dropdown">
       <input type="hidden" name="catId" id="catId" value="<%= category.id %>">
-      <input name="category" id="myInput" type="text" value="<%= category.name %>" hidden>
+      <input name="category" id="myInput" type="text" value="<%= category.name += ' - create new to change' %>" hidden>
       <input  value="<%= category.name %>" disabled>
     </div>
-    <label for="name">To edit create new:</label>
-    <input type="text" name="name" id="name" value="<%= item.name %>" disabled>
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" value="<%= item.name += ' - create new to change' %>" disabled>
     <label for="info">Info:</label>
     <input type="text" name="info" id="info" value="<%= item.info %>">
-    <label for="price">Price:</label>
+    <label for="price"><span style="color: red;">*</span>Price:</label>
     <input type="number" name="price" id="price" step="0.01" value="<%= item.price %>" min="1">
     <label for="quantity">Quantity:</label>
     <input type="number" name="quantity" id="quantity" value="<%= item.quantity %>">
-    <a href="/item/delete/<%= item.id %>">DELETE ITEM</a>
-    <button id="submit" type="submit">UPDATE ITEM</button>
+    <div style="flex-direction: row; justify-content: space-between;">
+      <button class="cancel-btn" type="button" onclick="history.back()">CANCEL</button>
+      <button class="add-update-btn" id="submit" type="submit">UPDATE ITEM</button>
+    </div>
+  </div>
 </form>
+<%- include('../errors', { errors }); %>

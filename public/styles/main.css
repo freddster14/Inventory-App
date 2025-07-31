@@ -137,8 +137,7 @@ a:hover {
 
 .form-box {
   background-color: var(--box-background);
-  padding: 10px;
-  font-size: 1.2em;
+  padding: 0px 10px 10px 10px;
 }
 
 .form-box div {

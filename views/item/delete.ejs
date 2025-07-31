@@ -1,12 +1,21 @@
-<form action="/item/delete/<%= item.id %>" method="post">
-  <h1>
-    <%=item.name %>
-  </h1>
-  <div>
-    <p><%= item.info %></p>
-    <p><%= item.price %></p>
-    <p><%= item.quantity %></p>
+<h1>
+  <%=item.name %>
+</h1>
+<form action="/item/delete/<%= item.id %>" method="post" class="form-box">
+  <div style="gap: 0px; max-width: 100%;">
+    <p>Category: <a href="/category/<%= category.id %>">
+        <%= category.name %>
+      </a></p>
+    <p>Information: <%= item.info %>
+    </p>
+    <p>Price: $<%= item.price %>
+    </p>
+    <p>Available: <%= item.quantity %>
+    </p>
+    <p>Are you sure you want to remove this item?</p>
+    <div style="flex-direction: row; justify-content: space-between; width: 50%;">
+      <button class="cancel-btn" type="button" onclick="history.back()">CANCEL</button>
+      <button class="delete-btn" type="submit">DELETE FOREVER</button>
+    </div>
   </div>
-  <p>Are you sure you want to remove this item?</p>
-  <button type="submit">DELETE FOREVER</button>
 </form>

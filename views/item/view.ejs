@@ -1,10 +1,10 @@
-<div style="display: flex; justify-content: space-between;">
+<div class="header">
   <h1>
     <%= item.name %>
   </h1>
   <div class="action-box">
-    <a href="/item/edit/<%= item.id %>" style="font-size: 2em;">✍️</a>
-    <a href="/item/delete/<%= item.id %>" style="font-size: 2em;">🗑️</a>
+    <a class="edit-icon" href="/item/edit/<%= item.id %>" style="font-size: 2em;">✍️</a>
+    <a class="trash-icon" href="/item/delete/<%= item.id %>" style="font-size: 2em;">🗑️</a>
   </div>
  
 </div>
