@@ -1,25 +1,26 @@
 <h1>No Category</h1>
 <p>Assign items to their respected categories in order to edit their content.</p>
-<div class="items-grid" style="padding: 0px 10px;">
+<div class="items-grid header-row">
   <p>Name</p>
   <p>Price</p>
   <p>Available</p>
-  <p style="margin-left: auto;">Select a Category</p>
+  <p style=" grid-column: 4/-1;">Select a Category</p>
 </div>
+
 <ul class="list">
   <% items.forEach(item => { %>
       <li class="items-grid">
         <p><%= item.name %></p>
         <p><%= item.price %></p>
         <p><%= item.quantity %></p>
-        <form action="/item/move/<%= item.id %>" method="post" style="margin-left: auto;">
+        <form action="/item/move/<%= item.id %>" method="post" style="margin-left: auto; grid-column: 4/-1;">
           <%- include('../errors', { errors }); %>
           <div class="dropdown">
             <input type="hidden" name="catId" id="catId">
-            <input  name="category" id="myInput" type="text" oninput="filterCategories()"
-              placeholder="Search.." autocomplete="off">
+            <input class="search" name="category" id="myInput" type="text" oninput="filterCategories()"
+              placeholder=" 🔍 Search" autocomplete="off">
             <ul class="search-list"></ul>  
-            <button type="submit">Add Category</button>
+            <button class="add-update-btn" type="submit">Add Category</button>
           </div>
         </form>
       </li>

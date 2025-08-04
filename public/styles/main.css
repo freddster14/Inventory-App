@@ -3,7 +3,7 @@
 :root {
   --link-background: gray;
   --box-background: white;
-  --body-backgorund: rgb(233, 233, 233);
+  --body-background: rgb(233, 233, 233);
 }
 
 body,html {
@@ -56,7 +56,7 @@ a:hover {
 .body {
   grid-column: 2;
   grid-row: 1/-1;
-  background-color: var(--body-backgorund);
+  background-color: var(--body-background);
   padding: 0px 15px;
   
 }
@@ -109,7 +109,7 @@ a:hover {
 }
 
 .seperator {
-  border-bottom: 1px solid var(--body-backgorund);
+  border-bottom: 1px solid var(--body-background);
 }
 
 .header-row {
@@ -137,7 +137,7 @@ a:hover {
 
 .form-box {
   background-color: var(--box-background);
-  padding: 0px 10px 10px 10px;
+  padding: 10px;
 }
 
 .form-box div {
@@ -196,4 +196,13 @@ a:hover {
   list-style: none;
   padding: 0px 10px;
   color: red;
+}
+
+.dropdown
+.search {
+  border-radius: 7px;
+  width: 45%;
+  font-size: 0.9em;
+  height: 26px;
+  border: 1px solid var(--link-background);
 }
