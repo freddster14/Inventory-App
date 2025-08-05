@@ -50,25 +50,7 @@ exports.deleteItem = async (req, res) => {
   res.redirect(`/category/${item.cat_id}`);
 };
 
-exports.moveItem = [
-  validateCategory,
-  async (req, res) => {
-    const errors = validationResult(req);
-    const items = await db.getCategoryItems(0);
-    if (!errors.isEmpty()) {
-      const categories = await db.getCategories();
-      return res.status(400).render('category/noCategory', {
-        categories,
-        items,
-        errors: errors.array(),
-      });
-    }
-    const { id } = req.params;
-    const { catId } = req.body;
-    await db.moveItem(catId, id);
-    return res.redirect('/');
-  },
-];
+
 
 exports.postItem = [
   validateCategory,

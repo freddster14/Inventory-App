@@ -1,23 +1,23 @@
 <h1>No Category</h1>
-<p>Assign items to their respected categories in order to edit their content.</p>
+<p>Assign items to their respected categories, <span style="font-weight: bold;">by selecting a category from the
+  <br> dropdown menu</span>, which will allow you edit their content in their respective category.
+</p>
 <div class="items-grid header-row">
   <p>Name</p>
   <p>Price</p>
   <p>Available</p>
   <p style=" grid-column: 4/-1;">Select a Category</p>
 </div>
-
 <ul class="list">
-  <% items.forEach(item => { %>
+  <% items.forEach((item, i) => { %>
       <li class="items-grid">
         <p><%= item.name %></p>
         <p><%= item.price %></p>
         <p><%= item.quantity %></p>
-        <form action="/item/move/<%= item.id %>" method="post" style="margin-left: auto; grid-column: 4/-1;">
-          <%- include('../errors', { errors }); %>
+        <form action="/category/move/<%= item.id %>" method="post" style="margin-left: auto; grid-column: 4/-1;">
           <div class="dropdown">
             <input type="hidden" name="catId" id="catId">
-            <input class="search" name="category" id="myInput" type="text" oninput="filterCategories()"
+            <input class="search" name="category" id="myInput" type="text" oninput="filterCategories(<%= i %>)"
               placeholder=" 🔍 Search" autocomplete="off">
             <ul class="search-list"></ul>  
             <button class="add-update-btn" type="submit">Add Category</button>
@@ -26,32 +26,40 @@
       </li>
   <% }) %>
 </ul>
+<%- include('../errors', { errors }); %>
 <script>
   const categories = <%- JSON.stringify(categories) %>;
-  const list = document.querySelector('.search-list');
-  document.querySelector('form').addEventListener('submit', (e) => {
-    const catId = document.querySelector('#catId');
-    if (!catId.value && list.childElementCount > 0) {
-      catId.value = 'missing click';
-    }
-  });
-  const appendCategories = (filtered) => {
+  const appendCategories = (filtered, searchInput, catId, list) => {
     filtered.forEach(category => {
       const li = document.createElement('li');
       li.textContent = category.name;
       li.addEventListener('click', () => {
-        document.getElementById('myInput').value = category.name;
-        document.getElementById('catId').value = category.id;
+        searchInput.value = category.name;
+        catId.value = category.id;
         list.innerHTML = '';
       })
       list.appendChild(li);
     });
   };
-  const filterCategories = () => {
-    const searchInput = document.getElementById('myInput').value.toLowerCase();
+  const filterCategories = (i) => {
+    const allList = document.querySelectorAll('.search-list');
+    const searchInput = document.querySelectorAll('#myInput')[i];
+    const catId = document.querySelectorAll('#catId')[i];
+    const inputValue = searchInput.value.toLowerCase();
+    const list = document.querySelectorAll('.search-list')[i];
+    console.log(searchInput, list)
+    // When input is unfocused clear list
+    searchInput.addEventListener('blur', () => {
+      setTimeout(() => {
+        list.innerHTML = '';
+        console.log(document.getElementById('catId').value, searchInput.value)
+      }, 300)
+    })
+
     document.getElementById('catId').value = '';
-    if (searchInput === '') return list.innerHTML = '';
-    const filtered = categories.filter(category => category.name.toLowerCase().includes(searchInput));
+    if (inputValue === '') return list.innerHTML = '';
+    // Search process
+    const filtered = categories.filter(category => category.name.toLowerCase().includes(inputValue));
     list.innerHTML = '';
     if (filtered.length === 0) {
       const li = document.createElement('li');
@@ -59,6 +67,6 @@
       list.appendChild(li);
       return;
     }
-    appendCategories(filtered);
+    appendCategories(filtered, searchInput, catId, list);
   };
 </script>

@@ -36,11 +36,12 @@ const validateCategory = [
   body('category')
     .trim()
     .notEmpty()
-    .withMessage('Category does not exist, create new one.'),
+    .withMessage('Category must not be empty.')
+    .bail(),
   body('catId')
-    .if((value, { req }) => value === 'missing click')
-    .isEmpty()
-    .withMessage('Select a category from list.'),
+    .if((value, { req }) => req.body.category)
+    .notEmpty()
+    .withMessage('Category does not exists.'),
 ];
 
 module.exports = { validateName, validateInfo, validateCategory };

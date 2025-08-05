@@ -1,6 +1,6 @@
 const db = require('../models/queries');
 const { validationResult } = require('express-validator');
-const { validateName } = require('../models/validators');
+const { validateName, validateCategory } = require('../models/validators');
 
 exports.getCategories = async (req, res) => {
   const categories = await db.getCategories();
@@ -85,6 +85,27 @@ exports.postCategory = [
       }
     }
     return res.status(500).render('category/form', { name, errors: [{ msg: 'An unexpected error occurred.' }] });
+  },
+];
+
+exports.moveItem = [
+  validateCategory,
+  async (req, res) => {
+    const errors = validationResult(req);
+    const items = await db.getCategoryItems(1);
+    if (!errors.isEmpty()) {
+      const categories = await db.getCategories();
+      return res.status(400).render('category/noCategory', {
+        categories,
+        items,
+        errors: errors.array(),
+      });
+    }
+    console.log('no error')
+    const { id } = req.params;
+    const { catId } = req.body;
+    await db.moveItem(catId, id);
+    return res.redirect(`/category/${catId}`);
   },
 ];
 
