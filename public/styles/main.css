@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=TikTok+Sans:opsz,wght@12..36,300..900&display=swap');
 
 :root {
-  --link-background: gray;
+  --link-background: rgb(168, 168, 168);
   --box-background: white;
   --body-background: rgb(233, 233, 233);
 }
@@ -25,11 +25,10 @@ a:hover {
   background-color: var(--link-background);
 }
 
-
 .content {
   display: grid;
-  grid-template-columns: 150px 1fr;
-  grid-template-rows: 100px auto;
+  grid-template-columns: 120px 1fr;
+  grid-template-rows: auto;
   height: 100%;
 }
 
@@ -44,11 +43,46 @@ a:hover {
   gap: 10px;
   z-index: 1;
   align-items: center;
-  padding-top: 25px;
+  padding-top: 20px;
   font-size: 1.1em;
 }
+#categories-link, #inventory-link, #no-category-link {
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 35px;
+  display: inline-block;
+  height: 35px;
+}
 
-.sidebar p {
+#categories-link {
+  background-image: url('/images/tag-2.svg');
+  background-size: 60%;
+  
+}
+
+#inventory-link {
+  background-image: url('/images/inventory.svg');
+  background-size: 70%;
+  
+}
+
+#no-category-link {
+  background-image: url('/images/no-tag.svg');
+  background-size: 65%;
+}
+
+.sidebar div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 17px;
+}
+
+.sidebar img {
+  width: 35px;
+  height: 35px;
+}
+
+.sidebar h1 {
   font-size: 1.2em;
   margin: 10px 0px;
 }

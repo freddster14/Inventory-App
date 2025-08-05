@@ -23,6 +23,7 @@ app.use(expressLayouts);
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(express.static(assestsPath));
 app.use(express.urlencoded({ extended: true }));
+
 app.use('/category', categoryRouter);
 app.use('/item', itemRouter);
 app.use('/', mainRouter);

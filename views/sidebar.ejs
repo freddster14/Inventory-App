@@ -1,6 +1,9 @@
 <ul class="sidebar">
-  <p>Inventory App</p>
-  <li><a href="/category" class="<%= currentUrl !== '/category/1' && currentUrl.includes('/category') ? 'active-link' : '' %>">categories</a></li>
-  <li><a href="/item" class="<%= currentUrl.includes('/item') ? 'active-link' : '' %>">inventory</a></li>
-  <li><a href="/category/1" class="<%= currentUrl === '/category/1' ? 'active-link': '' %>">no category</a></li>
+  <div>
+    <img src="/images/available.png" alt="package with green check">
+    <h1>Storix</h1>
+  </div>
+  <li ><a href="/category" id="categories-link" class="<%= currentUrl !== '/category/1' && currentUrl.includes('/category') ? 'active-link' : '' %>"></a></li>
+  <li><a href="/item" id="inventory-link" class="<%= currentUrl.includes('/item') ? 'active-link' : '' %>"></a></li>
+  <li><a href="/category/1" id="no-category-link" class="<%= currentUrl === '/category/1' ? 'active-link': '' %>"></a></li>
 </ul>
