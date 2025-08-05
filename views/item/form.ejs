@@ -1,16 +1,17 @@
 <h1>Create Item:</h1>
 <form action="/item/new" method="post" class="form-box">
   <div>
-    <label for="category">Category:</label>
     <% if (selectedCategory) { %>
+      <label for="category">Category:</label>
       <input type="hidden" name="catId" value="<%= selectedCategory.id %>">
       <input type="hidden" name="category" value="<%= selectedCategory.name %>">
       <input type="text" value="<%= selectedCategory.name %>" disabled>
       <% } else { %>
+      <label for="category"><span style="color: red;">*</span>Category:</label>
       <div class="dropdown">
         <input type="hidden" name="catId" id="catId">
-        <input name="category" type="text" oninput="filterCategories()" placeholder=" 🔍 Search" autocomplete="off">
-        <ul class="list"></ul>
+        <input name="category" id="myInput" type="text" oninput="filterCategories()" placeholder=" 🔍 Search" autocomplete="off">
+        <ul style="margin-top: 22px;" class="search-list"></ul>
       </div>
     <% } %>
     
@@ -32,7 +33,7 @@
 <%- include('../errors', { errors }); %>
 <script>
   const categories = <%- JSON.stringify(categories) %>;
-  const list = document.querySelector('.list');
+  const list = document.querySelector('.search-list');
   document.querySelector('form').addEventListener('submit', (e) => {
     const catId = document.querySelector('#catId');
     if (!catId.value && list.childElementCount > 0) {
