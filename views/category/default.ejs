@@ -7,7 +7,7 @@
   
   <p style="grid-column: 4/-1; margin-left: auto;">Actions</p>
 </div>
-<ul class="list">
+<ul class="list" >
   <% categories.forEach((category, i) => { %>
     <li style="justify-content: space-between;" class="<%= i === categories.length - 1 ? 'items' : 'items seperator' %>">
       <a href="category/<%= category.id %>" ><%= category.name%></a>

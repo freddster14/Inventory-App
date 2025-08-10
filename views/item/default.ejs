@@ -9,19 +9,17 @@
   <p>Active</p>
   <p style="margin-left: auto;">Actions</p>
 </div>
-<ul class="list">
+<ul class="list" style="--limit: <%= limit %>">
   <% items.forEach((item, i) => { %>
-  <li class="<%= i === items.length - 1 ? 'items-grid' : 'items-grid seperator'%>">
+  <li class="<%= i === limit  ? 'items-grid' : 'items-grid seperator'%>">
     <% if(item.cat_id===1) { %>
       <a href="/category/1">
         <%= item.name %>
       </a>
-
       <% } else { %>
         <a href="/item/<%= item.id %>">
           <%= item.name %>
         </a>
-
         <% } %>
     <p><%= item.price %></p>
     <p><%= item.quantity %></p>

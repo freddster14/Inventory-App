@@ -124,6 +124,7 @@ a:hover {
   padding: 0px 10px;
   margin: 0;
   background-color: var(--box-background);
+  min-height: calc(54px * var(--limit));
 }
 
 
@@ -232,11 +233,19 @@ a:hover {
   color: red;
 }
 
-.dropdown
 .search {
   border-radius: 7px;
   width: 45%;
   font-size: 0.9em;
   height: 26px;
   border: 1px solid var(--link-background);
+}
+
+.list-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 10px;
+  background-color: var(--box-background);
+  border-top: 1px solid black;
 }

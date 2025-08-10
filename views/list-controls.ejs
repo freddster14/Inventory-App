@@ -1,4 +1,4 @@
-<div>
+<div class="list-controls">
   <div>
     <form action="/item" method="get">
       <label for="numberSelect">Results per page:</label>
@@ -19,7 +19,7 @@
       <a <% if (page !== 1 ) { %>href="<%= buildUrl(page - 1, 'page') %>"<% } %>><</a>
         <% for(let p = startPage; p <= endPage; p++) { %>
           <% if(p === page) { %>
-            <span><%= p %></span>
+            <span style="border-radius: 10px; padding: 3px 5px; background-color: var(--link-background);"><%= p %></span>
           <% } else { %>
               <a href="<%= buildUrl(p, 'page')%>"><%= p %></a>
           <% } %>
