@@ -4,7 +4,6 @@
 </div>
 <div class="items-grid header-row">
   <p>Name</p>
-  
   <p style="grid-column: 4/-1; margin-left: auto;">Actions</p>
 </div>
 <ul class="list" >
@@ -18,6 +17,6 @@
     </li>
   <% }) %>
 </ul>
-<% if (categories.length > 10) { %>
+<% if (categories.length > 10 || limit === 10) { %>
   <%- include('../list-controls'); %>
 <% } %>

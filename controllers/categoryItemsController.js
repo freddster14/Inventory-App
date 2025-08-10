@@ -24,7 +24,20 @@ exports.getItems = async (req, res) => {
   const { id } = req.params;
   const category = await db.getCategory(id);
   const items = await db.getCategoryItems(category.id);
-  res.render('category/view', { category, items, id });
+  const page = parseInt(req.query.page, 10) || 1;
+  const limit = parseInt(req.query.limit, 10) || 12;
+  const totalPages = items.length / limit;
+  const fn = (newQuery, query) => buildUrl(req, newQuery, 'category', query);
+
+  res.render('category/view', {
+    category,
+    items,
+    id,
+    page,
+    totalPages,
+    limit,
+    buildUrl: fn,
+  });
 };
 
 exports.getNoCategoryItems = async (req, res) => {

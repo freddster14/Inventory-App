@@ -25,3 +25,6 @@
     </li>
   <% }) %>
 </ul>
+<% if (items.length > 10 || limit === 10) { %>
+  <%- include('../list-controls'); %>
+<% } %>
