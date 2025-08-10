@@ -21,8 +21,8 @@ exports.getItems = async (limit, page) => {
   return rows;
 };
 
-exports.getTotalPages = async (limit) => {
-  const { rows } = await pool.query('SELECT COUNT(*) from items');
+exports.getTotalPages = async (limit, table) => {
+  const { rows } = await pool.query(`SELECT COUNT(*) from ${table}`);
   const items = parseInt(rows[0].count, 10);
   return Math.ceil(items / limit);
 };

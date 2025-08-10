@@ -1,10 +1,23 @@
 const db = require('../models/queries');
 const { validationResult } = require('express-validator');
 const { validateName, validateCategory } = require('../models/validators');
+const { buildUrl } = require('../models/helper-functions');
 
 exports.getCategories = async (req, res) => {
+  const page = parseInt(req.query.page, 10) || 1;
+  const limit = parseInt(req.query.limit, 10) || 12;
+  const totalPages = await db.getTotalPages(limit, 'categories');
+  // Revert back to max page as a result of limit change or data
+  if (totalPages < page) return res.redirect(`/item?page=${totalPages}&limit=${limit}`);
+  const fn = (newQuery, query) => buildUrl(req, newQuery, 'category', query);
   const categories = await db.getCategories();
-  res.render('category/default', { categories });
+  return res.render('category/default', {
+    categories,
+    page,
+    limit,
+    totalPages,
+    buildUrl: fn,
+  });
 };
 
 exports.getItems = async (req, res) => {

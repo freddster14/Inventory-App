@@ -6,7 +6,7 @@ const { buildUrl } = require('../models/helper-functions');
 exports.getItems = async (req, res) => {
   const page = parseInt(req.query.page, 10) || 1;
   const limit = parseInt(req.query.limit, 10) || 12;
-  const totalPages = await db.getTotalPages(limit);
+  const totalPages = await db.getTotalPages(limit, 'items');
   // Revert back to max page as a result of limit change or data
   if (totalPages < page) return res.redirect(`/item?page=${totalPages}&limit=${limit}`);
   const fn = (newQuery, query) => buildUrl(req, newQuery, 'item', query);
