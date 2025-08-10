@@ -12,7 +12,7 @@ const assestsPath = path.join(__dirname, '/public/styles');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
+app.set('layout extractScripts', true);
 // Middleware to make the current URL available
 app.use((req, res, next) => {
   res.locals.currentUrl = req.originalUrl;

@@ -15,9 +15,16 @@ exports.getCategoryItems = async (categoryId) => {
   return rows;
 };
 
-exports.getItems = async (limit = 15) => {
-  const { rows } = await pool.query('SELECT * FROM items LIMIT $1', [limit]);
+exports.getItems = async (limit, page) => {
+  const offset = (page - 1) * limit;
+  const { rows } = await pool.query('SELECT * FROM items LIMIT $1 OFFSET $2', [limit, offset]);
   return rows;
+};
+
+exports.getTotalPages = async (limit) => {
+  const { rows } = await pool.query('SELECT COUNT(*) from items');
+  const items = parseInt(rows[0].count, 10);
+  return Math.ceil(items / limit);
 };
 
 exports.getItem = async (id) => {

@@ -101,7 +101,6 @@ exports.moveItem = [
         errors: errors.array(),
       });
     }
-    console.log('no error')
     const { id } = req.params;
     const { catId } = req.body;
     await db.moveItem(catId, id);

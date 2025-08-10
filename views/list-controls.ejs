@@ -1,0 +1,19 @@
+<div>
+  <div>
+    <form action="/item" method="get">
+      <label for="numberSelect">Results per page:</label>
+      <select id="numberSelect" name="limit" onchange="window.location.href='<%= buildUrl('REPLACE_ME', 'limit') %>'.replace('REPLACE_ME', this.value)">
+        <% for(let i = 10; i <= 18; i += 2) { %>
+          <option value="<%= i %>" <% if (i===limit) { %>selected<% } %>><%= i %>
+          </option>
+          <%} %>
+      </select>
+    </form>
+  </div>
+  <div>
+
+    <a <% if (page !== 1 ) { %>href="<%= buildUrl(page - 1, 'page') %>"<% } %>><</a>
+    <a <% if (page !== totalPages ) { %>href="<%= buildUrl(page + 1, 'page') %>"<% } %> >></a>
+
+  </div>
+</div>
