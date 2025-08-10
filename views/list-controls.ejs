@@ -11,9 +11,20 @@
     </form>
   </div>
   <div>
-
-    <a <% if (page !== 1 ) { %>href="<%= buildUrl(page - 1, 'page') %>"<% } %>><</a>
-    <a <% if (page !== totalPages ) { %>href="<%= buildUrl(page + 1, 'page') %>"<% } %> >></a>
-
+    <%
+    const startPage = Math.max(1, (totalPages === page) ? totalPages - 2 : page - 1);
+    const endPage = Math.min(totalPages, (startPage === 1) ? 3 : page + 1);
+    %>
+    <% if(totalPages > 1) { %>
+      <a <% if (page !== 1 ) { %>href="<%= buildUrl(page - 1, 'page') %>"<% } %>><</a>
+        <% for(let p = startPage; p <= endPage; p++) { %>
+          <% if(p === page) { %>
+            <span><%= p %></span>
+          <% } else { %>
+              <a href="<%= buildUrl(p, 'page')%>"><%= p %></a>
+          <% } %>
+        <% }%>
+      <a <% if (page !== totalPages ) { %>href="<%= buildUrl(page + 1, 'page') %>"<% } %> >></a>
+    <% } %>
   </div>
 </div>

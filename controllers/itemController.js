@@ -4,14 +4,14 @@ const { validateCategory, validateInfo, validateName } = require('../models/vali
 const { buildUrl } = require('../models/helper-functions');
 
 exports.getItems = async (req, res) => {
-  let page = parseInt(req.query.page, 10) || 1;
+  const page = parseInt(req.query.page, 10) || 1;
   const limit = parseInt(req.query.limit, 10) || 12;
   const totalPages = await db.getTotalPages(limit);
   // Revert back to max page as a result of limit change or data
   if (totalPages < page) return res.redirect(`/item?page=${totalPages}&limit=${limit}`);
   const fn = (newQuery, query) => buildUrl(req, newQuery, 'item', query);
   const items = await db.getItems(limit, page);
-  res.render('item/default', {
+  return res.render('item/default', {
     items,
     page,
     limit,
