@@ -17,6 +17,6 @@
     </li>
   <% }) %>
 </ul>
-<% if (categories.length > 10 || limit === 10) { %>
+<% if (categories.length > 10 || totalPages > 1) { %>
   <%- include('../list-controls'); %>
 <% } %>
