@@ -26,6 +26,10 @@
       </li>
   <% }) %>
 </ul>
+<% if (items.length > 10 || totalPages > 1) { %>
+  <%- include('../list-controls'); %>
+<% } %>
+
 <%- include('../errors', { errors }); %>
 <script>
   const categories = <%- JSON.stringify(categories) %>;

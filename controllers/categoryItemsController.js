@@ -8,9 +8,9 @@ exports.getCategories = async (req, res) => {
   const limit = parseInt(req.query.limit, 10) || 12;
   const totalPages = await db.getTotalPages(limit, 'categories');
   // Revert back to max page as a result of limit change or data
-  if (totalPages < page) return res.redirect(`/item?page=${totalPages}&limit=${limit}`);
+  if (totalPages < page) return res.redirect(`/category?page=${totalPages}&limit=${limit}`);
   const fn = (newQuery, query) => buildUrl(req, newQuery, 'category', query);
-  const categories = await db.getCategories();
+  const categories = await db.getCategories(limit, page);
   return res.render('category/default', {
     categories,
     page,
@@ -23,12 +23,11 @@ exports.getCategories = async (req, res) => {
 exports.getItems = async (req, res) => {
   const { id } = req.params;
   const category = await db.getCategory(id);
-  const items = await db.getCategoryItems(category.id);
   const page = parseInt(req.query.page, 10) || 1;
   const limit = parseInt(req.query.limit, 10) || 12;
-  const totalPages = items.length / limit;
-  const fn = (newQuery, query) => buildUrl(req, newQuery, 'category', query);
-
+  const items = await db.getCategoryItems(category.id, limit, page);
+  const totalPages = await db.getTotalPages(limit, 'items', id);
+  const fn = (newQuery, query) => buildUrl(req, newQuery, `category/${id}`, query);
   res.render('category/view', {
     category,
     items,
@@ -43,7 +42,19 @@ exports.getItems = async (req, res) => {
 exports.getNoCategoryItems = async (req, res) => {
   const items = await db.getCategoryItems(1);
   const categories = await db.getCategories();
-  res.render('category/noCategory', { categories, items, errors: [] });
+  const page = parseInt(req.query.page, 10) || 1;
+  const limit = parseInt(req.query.limit, 10) || 12;
+  const totalPages = items.length / limit;
+  const fn = (newQuery, query) => buildUrl(req, newQuery, 'category', query);
+  res.render('category/noCategory', {
+    categories,
+    items,
+    page,
+    limit,
+    totalPages,
+    buildUrl: fn,
+    errors: [],
+  });
 };
 
 exports.getForm = (req, res) => {

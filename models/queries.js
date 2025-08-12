@@ -1,7 +1,8 @@
 const pool = require('./pool');
 
-exports.getCategories = async (limit = 1) => {
-  const { rows } = await pool.query('SELECT * FROM categories WHERE id>$1', [limit]);
+exports.getCategories = async (limit, page) => {
+  const offset = (page - 1) * limit;
+  const { rows } = await pool.query('SELECT * FROM categories WHERE id > 1 LIMIT $1 OFFSET $2', [limit, offset]);
   return rows;
 };
 
@@ -10,8 +11,9 @@ exports.getCategory = async (id) => {
   return rows[0];
 };
 
-exports.getCategoryItems = async (categoryId) => {
-  const { rows } = await pool.query('SELECT * FROM items WHERE cat_id = $1', [categoryId]);
+exports.getCategoryItems = async (categoryId, limit, page) => {
+  const offset = (page - 1) * limit;
+  const { rows } = await pool.query('SELECT * FROM items WHERE cat_id = $1 LIMIT $2 OFFSET $3', [categoryId, limit, offset]);
   return rows;
 };
 
@@ -21,7 +23,12 @@ exports.getItems = async (limit, page) => {
   return rows;
 };
 
-exports.getTotalPages = async (limit, table) => {
+exports.getTotalPages = async (limit, table, catId) => {
+  if (catId) {
+    const { rows } = await pool.query(`SELECT COUNT(*) from ${table} WHERE cat_id = $1`, [catId]);
+    const items = parseInt(rows[0].count, 10);
+    return Math.ceil(items / limit);
+  }
   const { rows } = await pool.query(`SELECT COUNT(*) from ${table}`);
   const items = parseInt(rows[0].count, 10);
   return Math.ceil(items / limit);
