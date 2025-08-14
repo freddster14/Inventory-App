@@ -8,9 +8,9 @@
   <p>Available</p>
   <p style=" grid-column: 4/-1;">Select a Category</p>
 </div>
-<ul class="list">
+<ul class="list" style="--limit: <%= limit %>">
   <% items.forEach((item, i) => { %>
-      <li class="items-grid">
+      <li class="<%= i === limit ? 'items-grid' : 'items-grid seperator'%>">
         <p><%= item.name %></p>
         <p><%= item.price %></p>
         <p><%= item.quantity %></p>

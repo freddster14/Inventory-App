@@ -12,9 +12,9 @@
     <p style="grid-column: 4/-1; margin-left: auto;">Actions</p>
   </div>
 <% } %>
-<ul class="list">
+<ul class="list" style="--limit: <%= (items.length > 10 || totalPages > 1) ? limit : '' %>">
   <% items.forEach((item, i) => { %>
-    <li class="<%= i === items.length - 1 ? 'items-grid' : 'items-grid seperator'%>">
+    <li class="<%= i === limit ? 'items-grid' : 'items-grid seperator'%>">
         <a href="/item/<%= item.id %>"  ><%= item.name %></a>
         <p><%= item.price %></p>
         <p><%= item.quantity %></p>

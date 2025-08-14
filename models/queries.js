@@ -1,8 +1,12 @@
 const pool = require('./pool');
 
 exports.getCategories = async (limit, page) => {
-  const offset = (page - 1) * limit;
-  const { rows } = await pool.query('SELECT * FROM categories WHERE id > 1 LIMIT $1 OFFSET $2', [limit, offset]);
+  if (limit && page) {
+    const offset = (page - 1) * limit;
+    const { rows } = await pool.query('SELECT * FROM categories WHERE id > 1 LIMIT $1 OFFSET $2', [limit, offset]);
+    return rows;
+  }
+  const { rows } = await pool.query('SELECT * FROM categories WHERE id > 1');
   return rows;
 };
 

@@ -40,12 +40,12 @@ exports.getItems = async (req, res) => {
 };
 
 exports.getNoCategoryItems = async (req, res) => {
-  const items = await db.getCategoryItems(1);
   const categories = await db.getCategories();
   const page = parseInt(req.query.page, 10) || 1;
   const limit = parseInt(req.query.limit, 10) || 12;
-  const totalPages = items.length / limit;
-  const fn = (newQuery, query) => buildUrl(req, newQuery, 'category', query);
+  const items = await db.getCategoryItems(1, limit, page);
+  const totalPages = await db.getTotalPages(limit, 'items', 1);
+  const fn = (newQuery, query) => buildUrl(req, newQuery, 'category/1', query);
   res.render('category/noCategory', {
     categories,
     items,

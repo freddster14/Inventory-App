@@ -1,6 +1,6 @@
 <div class="list-controls">
   <div>
-    <form action="" method="get">
+    <form action="/" method="get">
       <label for="numberSelect">Results per page:</label>
       <select id="numberSelect" name="limit" onchange="window.location.href='<%= buildUrl('REPLACE_ME', 'limit') %>'.replace('REPLACE_ME', this.value)">
         <% for(let i = 10; i <= 18; i += 2) { %>
