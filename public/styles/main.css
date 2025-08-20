@@ -134,7 +134,11 @@ a:hover {
   padding: 10px 0px;
   align-items: center;
 }
-
+.checkbox {
+  width: fit-content;
+  position: absolute;
+  left: 140px;
+}
 
 .items-grid {
   list-style: none;

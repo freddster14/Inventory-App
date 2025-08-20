@@ -1,4 +1,17 @@
-<h1>No Category</h1>
+<div class="header">
+  <h1>No Category</h1>
+  <button class="add-update-btn" onclick="addBox()">Select Multiple</button>
+  <form action="/category/move/multiple" class="multiple" method="post" style="display: none;">
+    <div class="dropdown">
+      <input type="hidden" name="catId" id="catId">
+      <input class="search" name="category" id="myInput" type="text" oninput="filterCategories(0)"
+        placeholder=" 🔍 Search" autocomplete="off">
+      <ul class="search-list"></ul>
+      <button class="add-update-btn multiple-submit" type="submit">Add Category</button>
+    </div>
+  </form>
+  <button class="cancel-btn" style="display: none;" onclick="cancel()">Cancel</button>
+</div>
 <p>Assign items to their respected categories, <span style="font-weight: bold;">by selecting a category from the
   <br> dropdown menu</span>, which will allow you edit their content in their respective category.
 </p>
@@ -32,7 +45,27 @@
 
 <%- include('../errors', { errors }); %>
 <script>
+  let multipleActive = false;
   const categories = <%- JSON.stringify(categories) %>;
+  const items = <%- JSON.stringify(items) %>;
+  const buildUrl = <%- buildUrl %>
+  document.querySelector('.multiple').addEventListener('submit', function(e) {
+    e.preventDefault();
+    let res = '';
+    const checkboxes = document.querySelectorAll('.checkbox');
+    checkboxes.forEach((box, i) => {
+      if(box.checked) {
+        res += `${items[i].id}*`
+      }
+    })
+    if(res !== '') {
+      const url = new URL(location.href);
+      const params = url.searchParams;
+      params.set('items', res);
+      this.submit()
+    }
+  })
+
   const appendCategories = (filtered, searchInput, catId, list) => {
     filtered.forEach(category => {
       const li = document.createElement('li');
@@ -51,7 +84,6 @@
     const catId = document.querySelectorAll('#catId')[i];
     const inputValue = searchInput.value.toLowerCase();
     const list = document.querySelectorAll('.search-list')[i];
-    console.log(searchInput, list)
     // When input is unfocused clear list
     searchInput.addEventListener('blur', () => {
       setTimeout(() => {
@@ -63,8 +95,8 @@
     document.getElementById('catId').value = '';
     if (inputValue === '') return list.innerHTML = '';
     // Search process
+    console.log(categories)
     const filtered = categories.filter(category => category.name.toLowerCase().includes(inputValue));
-    list.innerHTML = '';
     if (filtered.length === 0) {
       const li = document.createElement('li');
       li.textContent = 'No category exists, create a new one';
@@ -73,4 +105,31 @@
     }
     appendCategories(filtered, searchInput, catId, list);
   };
+
+  function addBox() {
+    const list  = document.querySelector('.list');
+    const items = document.querySelectorAll('.list > *');
+    items.forEach((e) => {
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.className = 'checkbox';
+      list.style.paddingLeft = '30px';
+      e.prepend(checkbox)
+    });
+    document.querySelector('.multiple').style.display = 'block';
+    document.querySelectorAll('.add-update-btn')[0].style.display = 'none';
+    document.querySelector('.cancel-btn').style.display = 'block';
+  }
+
+  function cancel() {
+    const list = document.querySelector('.list');
+    const checkboxes = document.querySelectorAll('.checkbox');
+    checkboxes.forEach((e) => {
+      e.remove()
+    });
+    list.style.paddingLeft = '10px';
+    document.querySelector('.multiple').style.display = 'none';
+    document.querySelectorAll('.add-update-btn')[0].style.display = 'block';
+    document.querySelector('.cancel-btn').style.display = 'none';
+  }
 </script>
