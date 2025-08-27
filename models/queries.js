@@ -55,6 +55,13 @@ exports.moveItem = async (catId, id) => {
   await pool.query('UPDATE items SET cat_id=$1 WHERE id=$2', [catId, id]);
 };
 
+exports.moveMultipleItems = async (catId, itemsId) => {
+  const res = itemsId.split('*').map((id) => parseInt(id, 10));
+  res.pop();// Remove NaN tail
+  const SQL = `UPDATE items SET cat_id=${catId} WHERE id in (${res})`
+  await pool.query(SQL);
+};
+
 exports.postCategory = async (category) => {
   const capitalizeCat = category.charAt(0).toUpperCase() + category.slice(1);
   await pool.query('INSERT INTO categories (name) VALUES ($1)', [capitalizeCat]);

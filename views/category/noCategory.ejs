@@ -3,6 +3,7 @@
   <button class="add-update-btn" onclick="addBox()">Select Multiple</button>
   <form action="/category/move/multiple" class="multiple" method="post" style="display: none;">
     <div class="dropdown">
+      <input type="hidden" name="items" id="items">
       <input type="hidden" name="catId" id="catId">
       <input class="search" name="category" id="myInput" type="text" oninput="filterCategories(0)"
         placeholder=" 🔍 Search" autocomplete="off">
@@ -48,7 +49,6 @@
   let multipleActive = false;
   const categories = <%- JSON.stringify(categories) %>;
   const items = <%- JSON.stringify(items) %>;
-  const buildUrl = <%- buildUrl %>
   document.querySelector('.multiple').addEventListener('submit', function(e) {
     e.preventDefault();
     let res = '';
@@ -59,9 +59,7 @@
       }
     })
     if(res !== '') {
-      const url = new URL(location.href);
-      const params = url.searchParams;
-      params.set('items', res);
+      document.querySelector('#items').value = res;
       this.submit()
     }
   })
@@ -88,14 +86,12 @@
     searchInput.addEventListener('blur', () => {
       setTimeout(() => {
         list.innerHTML = '';
-        console.log(document.getElementById('catId').value, searchInput.value)
       }, 300)
     })
 
     document.getElementById('catId').value = '';
     if (inputValue === '') return list.innerHTML = '';
     // Search process
-    console.log(categories)
     const filtered = categories.filter(category => category.name.toLowerCase().includes(inputValue));
     if (filtered.length === 0) {
       const li = document.createElement('li');
