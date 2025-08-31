@@ -1,0 +1,36 @@
+
+
+.multi-select-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.multi-select-toolbar button {
+  padding: 9px;
+}
+
+.multi-search {
+  height: 30px;
+}
+
+.form-delete-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  width: fit-content;
+}
+
+.delete, .delete-multiple, .yes {
+  width: 100%;
+}
+
+.cancel-btn {
+  width: auto;
+}
+
+
+.instructions {
+  margin-top: 0px;
+}

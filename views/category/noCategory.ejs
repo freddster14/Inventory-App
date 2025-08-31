@@ -1,19 +1,28 @@
+<link rel="stylesheet" href="/noCat.css">
 <div class="header">
   <h1>No Category</h1>
-  <button class="add-update-btn" onclick="addBox()">Select Multiple</button>
-  <form action="/category/move/multiple" class="multiple" method="post" style="display: none;">
-    <div class="dropdown">
-      <input type="hidden" name="items" id="items">
-      <input type="hidden" name="catId" id="catId">
-      <input class="search" name="category" id="myInput" type="text" oninput="filterCategories(0)"
-        placeholder=" 🔍 Search" autocomplete="off">
-      <ul class="search-list"></ul>
-      <button class="add-update-btn multiple-submit" type="submit">Add Category</button>
+  <button class="add-update-btn" style="margin-left: auto;" onclick="addBox()">Select Multiple</button>
+  <div class="multi-select-toolbar">
+    <form action="/category/move/multiple" class="multiple" method="post" style="display: none;">
+      <div class="dropdown">
+        <input type="hidden" name="items" id="items">
+        <input type="hidden" name="catId" id="catId">
+        <input class="search multi-search" name="category" id="myInput" type="text" oninput="filterCategories(0)"
+          placeholder=" 🔍 Search" autocomplete="off">
+        <ul class="search-list"></ul>
+        <button class="add-update-btn multiple-submit" type="submit">Add Category</button>
+      </div>
+    </form>
+    <div class="form-delete-container">
+      <button class="cancel-btn" style="display: none;" onclick="cancel()">Cancel</button>
+      <form action="/category/multiple/delete" class="delete-multiple" method="post" style="display: none;">
+        <button class="delete-btn delete" type="button"  onclick="confirmationDelete()">Delete Items</button>
+        <button class="delete-btn yes"  style="display: none;" type="submit">Yes</button>
+      </form>
     </div>
-  </form>
-  <button class="cancel-btn" style="display: none;" onclick="cancel()">Cancel</button>
+  </div>
 </div>
-<p>Assign items to their respected categories, <span style="font-weight: bold;">by selecting a category from the
+<p class="instructions">Assign items to their respected categories, <span style="font-weight: bold;">by selecting a category from the
   <br> dropdown menu</span>, which will allow you edit their content in their respective category.
 </p>
 <div class="items-grid header-row">
@@ -49,6 +58,7 @@
   let multipleActive = false;
   const categories = <%- JSON.stringify(categories) %>;
   const items = <%- JSON.stringify(items) %>;
+  // multiple submit form
   document.querySelector('.multiple').addEventListener('submit', function(e) {
     e.preventDefault();
     let res = '';
@@ -63,7 +73,7 @@
       this.submit()
     }
   })
-
+  // search dropdown list
   const appendCategories = (filtered, searchInput, catId, list) => {
     filtered.forEach(category => {
       const li = document.createElement('li');
@@ -76,6 +86,7 @@
       list.appendChild(li);
     });
   };
+  // search logic
   const filterCategories = (i) => {
     const allList = document.querySelectorAll('.search-list');
     const searchInput = document.querySelectorAll('#myInput')[i];
@@ -101,7 +112,7 @@
     }
     appendCategories(filtered, searchInput, catId, list);
   };
-
+  // Add checkbox (DOM)
   function addBox() {
     const list  = document.querySelector('.list');
     const items = document.querySelectorAll('.list > *');
@@ -112,6 +123,7 @@
       list.style.paddingLeft = '30px';
       e.prepend(checkbox)
     });
+    document.querySelector('.delete-multiple').style.display = 'block';
     document.querySelector('.multiple').style.display = 'block';
     document.querySelectorAll('.add-update-btn')[0].style.display = 'none';
     document.querySelector('.cancel-btn').style.display = 'block';
@@ -124,8 +136,20 @@
       e.remove()
     });
     list.style.paddingLeft = '10px';
+    document.querySelector('.delete-multiple').style.display = 'none';
+    document.querySelector('.delete').style.display = 'block';
+    document.querySelector('.yes').style.display = 'none';
     document.querySelector('.multiple').style.display = 'none';
     document.querySelectorAll('.add-update-btn')[0].style.display = 'block';
     document.querySelector('.cancel-btn').style.display = 'none';
+    document.querySelector('p').innerHTML = `Assign items to their respected categories, <span style="font-weight: bold;">by selecting a category from the<br> dropdown menu</span>, which will allow you edit their content in their respective category.`;
+
+  }
+
+  function confirmationDelete() {
+    document.querySelector('.delete').style.display = 'none';
+    document.querySelector('.yes').style.display = 'block';
+    document.querySelector('.multiple').style.display = 'none';
+    document.querySelector('p').textContent = 'Are you sure you want to delete these items?';
   }
 </script>
