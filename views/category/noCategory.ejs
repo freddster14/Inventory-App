@@ -13,12 +13,13 @@
         <button class="add-update-btn multiple-submit" type="submit">Add Category</button>
       </div>
     </form>
+    <p class="confimation-text" style="display: none; margin-right: 25px;">Are you sure?</p>
     <div class="form-delete-container">
-      <button class="cancel-btn" style="display: none;" onclick="cancel()">Cancel</button>
       <form action="/category/multiple/delete" class="delete-multiple" method="post" style="display: none;">
         <button class="delete-btn delete" type="button"  onclick="confirmationDelete()">Delete Items</button>
         <button class="delete-btn yes"  style="display: none;" type="submit">Yes</button>
       </form>
+      <button class="cancel-btn" style="display: none;" onclick="cancel()">Cancel</button>
     </div>
   </div>
 </div>
@@ -142,14 +143,13 @@
     document.querySelector('.multiple').style.display = 'none';
     document.querySelectorAll('.add-update-btn')[0].style.display = 'block';
     document.querySelector('.cancel-btn').style.display = 'none';
-    document.querySelector('p').innerHTML = `Assign items to their respected categories, <span style="font-weight: bold;">by selecting a category from the<br> dropdown menu</span>, which will allow you edit their content in their respective category.`;
-
+    document.querySelector('p').style.display = 'none'
   }
 
   function confirmationDelete() {
     document.querySelector('.delete').style.display = 'none';
     document.querySelector('.yes').style.display = 'block';
     document.querySelector('.multiple').style.display = 'none';
-    document.querySelector('p').textContent = 'Are you sure you want to delete these items?';
+    document.querySelector('.confimation-text').style.display = 'block';
   }
 </script>

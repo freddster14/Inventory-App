@@ -199,7 +199,7 @@ a:hover {
   font-size: 0.9em;
   max-width: 400px;
   color: white;
-  border-radius: 7px;
+  border-radius: 5px;
   border: none;
   padding: 7px;
   font-weight: bold;
@@ -208,7 +208,7 @@ a:hover {
 }
 
 .add-update-btn {
-  background-color: rgb(0, 174, 255);
+  background-color: rgb(0, 102, 204);
 }
 
 .add-update-btn:hover {
@@ -216,7 +216,7 @@ a:hover {
 }
 
 .delete-btn {
-  background-color: red;
+  background-color: rgb(220, 53, 69);
 }
 
 .delete-btn:hover {
@@ -252,4 +252,10 @@ a:hover {
   padding: 16px 10px;
   background-color: var(--box-background);
   border-top: 1px solid black;
+}
+
+.dropdown {
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }

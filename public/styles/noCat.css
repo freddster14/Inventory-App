@@ -1,9 +1,7 @@
-
-
 .multi-select-toolbar {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .multi-select-toolbar button {
@@ -29,7 +27,6 @@
 .cancel-btn {
   width: auto;
 }
-
 
 .instructions {
   margin-top: 0px;
