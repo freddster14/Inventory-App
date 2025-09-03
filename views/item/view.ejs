@@ -12,5 +12,6 @@
   <p>Category: <a href="/category/<%= category.id %>"><%= category.name %></a></p>
   <p>Information: <%= item.info %></p>
   <p>Price: $<%= item.price %></p>
-  <p>Available: <%= item.quantity %></p>
+  <p class="quantity">Available: <span class="circle <%= item.quantity < 4 ? 'red-circle' : 'green-circle' %>"></span><%= item.quantity %></p>
+
 </div>

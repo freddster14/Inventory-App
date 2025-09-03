@@ -16,8 +16,8 @@
   <% items.forEach((item, i) => { %>
     <li class="<%= i === limit ? 'items-grid' : 'items-grid seperator'%>">
         <a href="/item/<%= item.id %>"  ><%= item.name %></a>
-        <p><%= item.price %></p>
-        <p><%= item.quantity %></p>
+        <p>$<%= item.price %></p>
+        <p class="quantity"><span class="circle <%= item.quantity < 4 ? 'red-circle' : 'green-circle' %>"></span><%= item.quantity %></p>
       <div class="action-box" style="grid-column: 4/-1; margin-left: auto;">
         <a href="/item/edit/<%= item.id %>">✍️</a>
         <a href="/item/delete/<%= item.id %>">🗑️</a>

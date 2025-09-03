@@ -21,8 +21,8 @@
           <%= item.name %>
         </a>
         <% } %>
-    <p><%= item.price %></p>
-    <p><%= item.quantity %></p>
+    <p>$<%= item.price %></p>
+    <p class="quantity"><span class="circle <%= item.quantity < 4 ? 'red-circle' : 'green-circle' %>"></span><%= item.quantity %></p>
     <p><% if(item.cat_id === 1) { %>
       No
       <% } else { %>

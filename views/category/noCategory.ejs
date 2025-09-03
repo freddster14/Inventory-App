@@ -37,7 +37,7 @@
       <li class="<%= i === limit ? 'items-grid' : 'items-grid seperator'%>">
         <p><%= item.name %></p>
         <p><%= item.price %></p>
-        <p><%= item.quantity %></p>
+        <p class="quantity"><span class="circle <%= item.quantity < 4 ? 'red-circle' : 'green-circle' %>"></span><%= item.quantity %></p>
         <form action="/category/move/<%= item.id %>" method="post" style="margin-left: auto; grid-column: 4/-1;">
           <div class="dropdown">
             <input type="hidden" name="catId" id="catId">
