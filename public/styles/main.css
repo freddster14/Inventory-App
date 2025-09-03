@@ -157,12 +157,28 @@ a:hover {
   border-bottom: 1px solid gray;
 }
 
+.dropdown {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  position: relative;
+}
+
+.search {
+  border-radius: 5px;
+  width: 45%;
+  font-size: 0.9em;
+  height: 26px;
+  border: 1px solid var(--link-background);
+}
+
 .search-list {
   position: absolute;
   background-color: var(--box-background);
   list-style-type: none;
   padding: 0px;
-  width: 185px;
+  width: 100%;
+  top: 32px;
   z-index: 1;
   box-shadow: 0px 5px 22px 0px rgba(0, 0, 0, 0.4);
   -webkit-box-shadow: 0px 5px 22px 0px rgba(0, 0, 0, 0.4);
@@ -171,7 +187,6 @@ a:hover {
 
 .search-list li {
   padding: 5px 10px;
-  
 }
 
 .form-box {
@@ -237,13 +252,6 @@ a:hover {
   color: red;
 }
 
-.search {
-  border-radius: 7px;
-  width: 45%;
-  font-size: 0.9em;
-  height: 26px;
-  border: 1px solid var(--link-background);
-}
 
 .list-controls {
   display: flex;
@@ -254,8 +262,3 @@ a:hover {
   border-top: 1px solid black;
 }
 
-.dropdown {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}

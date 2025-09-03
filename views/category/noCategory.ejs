@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/noCat.css">
 <div class="header">
   <h1>No Category</h1>
-  <button class="add-update-btn" style="margin-left: auto;" onclick="addBox()">Select Multiple</button>
+  <button class="add-update-btn start-multiple" style="margin-left: auto;" onclick="addBox()">Select Multiple</button>
   <div class="multi-select-toolbar">
     <form action="/category/move/multiple" class="multiple" method="post" style="display: none;">
       <div class="dropdown">
@@ -9,7 +9,7 @@
         <input type="hidden" name="catId" id="catId">
         <input class="search multi-search" name="category" id="myInput" type="text" oninput="filterCategories(0)"
           placeholder=" 🔍 Search" autocomplete="off">
-        <ul class="search-list"></ul>
+        <ul class="search-list" style="top: 20px;"></ul>
         <button class="add-update-btn multiple-submit" type="submit">Add Category</button>
       </div>
     </form>
@@ -41,7 +41,7 @@
         <form action="/category/move/<%= item.id %>" method="post" style="margin-left: auto; grid-column: 4/-1;">
           <div class="dropdown">
             <input type="hidden" name="catId" id="catId">
-            <input class="search" name="category" id="myInput" type="text" oninput="filterCategories(<%= i %>)"
+            <input class="search" name="category" id="myInput" type="text" oninput="filterCategories(<%= i += 1 %>)"
               placeholder=" 🔍 Search" autocomplete="off">
             <ul class="search-list"></ul>  
             <button class="add-update-btn" type="submit">Add Category</button>
@@ -62,6 +62,7 @@
   // multiple submit form
   document.querySelector('.multiple').addEventListener('submit', function(e) {
     e.preventDefault();
+    // return checkedboxes as string
     let res = '';
     const checkboxes = document.querySelectorAll('.checkbox');
     checkboxes.forEach((box, i) => {
@@ -76,13 +77,19 @@
   })
   // search dropdown list
   const appendCategories = (filtered, searchInput, catId, list) => {
+    list.innerHTML = '';
+    if (filtered.length === 0) {
+      const li = document.createElement('li');
+      li.textContent = 'No category exists, create a new one';
+      list.appendChild(li);
+      return;
+    }
     filtered.forEach(category => {
       const li = document.createElement('li');
       li.textContent = category.name;
       li.addEventListener('click', () => {
         searchInput.value = category.name;
         catId.value = category.id;
-        list.innerHTML = '';
       })
       list.appendChild(li);
     });
@@ -94,26 +101,19 @@
     const catId = document.querySelectorAll('#catId')[i];
     const inputValue = searchInput.value.toLowerCase();
     const list = document.querySelectorAll('.search-list')[i];
-    // When input is unfocused clear list
+    // when input is unfocused clear list
     searchInput.addEventListener('blur', () => {
       setTimeout(() => {
         list.innerHTML = '';
       }, 300)
-    })
+    });
 
     document.getElementById('catId').value = '';
-    if (inputValue === '') return list.innerHTML = '';
-    // Search process
+    // search process
     const filtered = categories.filter(category => category.name.toLowerCase().includes(inputValue));
-    if (filtered.length === 0) {
-      const li = document.createElement('li');
-      li.textContent = 'No category exists, create a new one';
-      list.appendChild(li);
-      return;
-    }
     appendCategories(filtered, searchInput, catId, list);
   };
-  // Add checkbox (DOM)
+  // add checkboxes (DOM)
   function addBox() {
     const list  = document.querySelector('.list');
     const items = document.querySelectorAll('.list > *');
@@ -124,6 +124,7 @@
       list.style.paddingLeft = '30px';
       e.prepend(checkbox)
     });
+
     document.querySelector('.delete-multiple').style.display = 'block';
     document.querySelector('.multiple').style.display = 'block';
     document.querySelectorAll('.add-update-btn')[0].style.display = 'none';
@@ -137,6 +138,7 @@
       e.remove()
     });
     list.style.paddingLeft = '10px';
+
     document.querySelector('.delete-multiple').style.display = 'none';
     document.querySelector('.delete').style.display = 'block';
     document.querySelector('.yes').style.display = 'none';
