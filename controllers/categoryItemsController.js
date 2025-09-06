@@ -70,7 +70,7 @@ exports.getUpdateForm = async (req, res) => {
 exports.getDelete = async (req, res) => {
   const { id } = req.params;
   const category = await db.getCategory(id);
-  const items = await db.getCategoryItems(category.id);
+  const items = await db.getAllCategoryItems(category.id);
   res.render('category/delete', { category, length: items.length });
 };
 
@@ -147,6 +147,13 @@ exports.moveItem = [
 
 exports.deleteCategory = async (req, res) => {
   const { id } = req.params;
+  await db.deleteCategory(id);
+  res.redirect('/category');
+};
+
+exports.deleteAll = async (req, res) => {
+  const { id } = req.params;
+  await db.deleteCategoryItems(id);
   await db.deleteCategory(id);
   res.redirect('/category');
 };

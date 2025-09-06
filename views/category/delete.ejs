@@ -1,17 +1,19 @@
 <h1>
   <%= category.name %>
 </h1>
-<form action="/category/delete/<%= category.id %>" method="post" class="form-box">
-  <div class="delete-info">
-    <p ">Deleting this category will move all of the <span>
-        <%= length %>
-      </span> item(s) inside it to "No Category".
-    </p>
-    <div style="flex-direction: row; justify-content: space-between;">
-      <button class="cancel-btn" type="button" onclick="history.back()">CANCEL</button>
-      <button class="delete-btn" type="submit">DELETE FOREVER</button>
-    </div>
-   
+<div class="delete-info">
+  <p ">Deleting this category will move all of the <span>
+      <%= length %>
+    </span> item(s) inside it to "No Category".
+  </p>
+  <div style="flex-direction: row; justify-content: space-between;">
+    <button class="cancel-btn" type="button" onclick="history.back()">CANCEL</button>
+    <form action="/category/delete/<%= category.id %>" method="post" class="form-box">
+      <button class="delete-btn" type="submit">DELETE CATEGORY</button>
+    </form>
+    <form action="/category/delete-all/<%= category.id %>" method="post" class="form-box">
+      <button class="delete-btn" type="submit">DELETE WITH ITEMS</button>
+    </form>
   </div>
   
-</form>
+</div>

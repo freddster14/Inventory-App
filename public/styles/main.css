@@ -191,23 +191,19 @@ a:hover {
 
 .form-box {
   background-color: var(--box-background);
-  padding: 10px;
 }
-
-.form-box div {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  max-width: 400px;
-}
-
-.form-box .delete-info {
-  max-width: 100%;
-}
-
 
 .form-box input {
   font-size: 0.8em;
+}
+
+.delete-info {
+  padding: 1px 14px;
+  background-color: var(--box-background);
+}
+
+.delete-info button {
+  margin-bottom: 10px;
 }
 
 .add-update-btn, .delete-btn, .cancel-btn {

@@ -21,6 +21,11 @@ exports.getCategoryItems = async (categoryId, limit, page) => {
   return rows;
 };
 
+exports.getAllCategoryItems = async (categoryId) => {
+  const { rows } = await pool.query('SELECT * FROM items WHERE cat_id = $1', [categoryId]);
+  return rows;
+};
+
 exports.getItems = async (limit, page) => {
   const offset = (page - 1) * limit;
   const { rows } = await pool.query('SELECT * FROM items LIMIT $1 OFFSET $2', [limit, offset]);
@@ -74,6 +79,10 @@ exports.updateCategory = async (id, category) => {
 
 exports.deleteCategory = async (id) => {
   await pool.query('DELETE FROM categories WHERE id=$1', [id]);
+};
+
+exports.deleteCategoryItems = async (id) => {
+  await pool.query('DELETE FROM items WHERE cat_id=$1', [id]);
 };
 
 exports.deleteItem = async (id) => {
