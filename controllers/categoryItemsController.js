@@ -10,7 +10,8 @@ exports.getCategories = async (req, res) => {
   // Revert back to max page as a result of limit change or data
   if (totalPages < page) return res.redirect(`/category?page=${totalPages}&limit=${limit}`);
   const fn = (newQuery, query) => buildUrl(req, newQuery, 'category', query);
-  const categories = await db.getCategories(limit, page);
+  const categories = await db.getCategoriesAndCount(limit, page);
+  console.log(categories);
   return res.render('category/default', {
     categories,
     page,

@@ -88,3 +88,9 @@ exports.deleteCategoryItems = async (id) => {
 exports.deleteItem = async (id) => {
   await pool.query('DELETE FROM items WHERE id=$1', [id]);
 };
+
+exports.getCategoriesAndCount = async (limit, page) => {
+  const offset = (page - 1) * limit;
+  const { rows } = await pool.query('SELECT categories.id, categories.name, COUNT(items.id) AS items_count FROM categories LEFT JOIN items ON categories.id = cat_id WHERE categories.id > 1 GROUP BY categories.id LIMIT $1 OFFSET $2', [limit, offset]);
+  return rows;
+};
