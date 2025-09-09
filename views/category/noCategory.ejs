@@ -44,7 +44,8 @@
             <input class="search" name="category" id="myInput" type="text" oninput="filterCategories(<%= i += 1 %>)"
               placeholder=" 🔍 Search" autocomplete="off">
             <ul class="search-list"></ul>  
-            <button class="add-update-btn" type="submit">Add Category</button>
+            <button class="add-update-btn" type="submit">➕ Add</button>
+            <a class="delete-btn" style="width: 17%; font-size: 1.3em; padding: 2px;" href="/item/delete/<%= item.id %>">🗑️</a>
           </div>
         </form>
       </li>
