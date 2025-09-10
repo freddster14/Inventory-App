@@ -2,9 +2,9 @@
   <h1>
     <%= item.name %>
   </h1>
-  <div class="action-box">
-    <a class="edit-icon" href="/item/edit/<%= item.id %>" style="font-size: 2em;">✍️</a>
-    <a class="trash-icon" href="/item/delete/<%= item.id %>" style="font-size: 2em;">🗑️</a>
+  <div>
+    <a class="add-update-btn" href="/item/edit/<%= item.id %>" >Edit</a>
+    <a class="delete-btn" href="/item/delete/<%= item.id %>" >Delete</a>
   </div>
  
 </div>

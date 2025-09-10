@@ -29,9 +29,9 @@
         Yes
       <% } %>
     </p>
-    <div class="action-box" style="margin-left: auto;">
-      <a href="/item/edit/<%= item.id %>">✍️</a>
-      <a href="/item/delete/<%= item.id %>">🗑️</a>
+    <div style="margin-left: auto;">
+      <a class="add-update-btn" href="/item/edit/<%= item.id %>">Edit</a>
+      <a class="delete-btn" href="/item/delete/<%= item.id %>">Delete</a>
     </div>
   </li>
   <% })%>
