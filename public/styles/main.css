@@ -16,7 +16,7 @@ body,html {
 a {
   color: inherit;
   text-decoration: none;
-  border-radius: 10px;
+  border-radius: 7px;
   padding: 3px 5px;
   width: fit-content;
 }

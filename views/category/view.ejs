@@ -1,6 +1,6 @@
 <div class="header">
   <h1><%= category.name %></h1>
-  <a href="/item/new/<%= category.id %>">➕ New Item</a>
+  <a class="add-update-btn" href="/item/new/<%= category.id %>">➕ New Item</a>
 </div>
 <% if (category.id === 0) { %>
   <p>Assign items to their respected categories in order to edit their content.</p>
