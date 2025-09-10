@@ -10,7 +10,7 @@
         <input class="search multi-search" name="category" id="myInput" type="text" oninput="filterCategories(0)"
           placeholder=" 🔍 Search" autocomplete="off">
         <ul class="search-list" style="top: 20px;"></ul>
-        <button class="add-update-btn multiple-submit" type="submit">Add Category</button>
+        <button class="add-update-btn multiple-submit" style="width: 100%;" type="submit">Add Selected</button>
       </div>
     </form>
     <p class="confimation-text" style="display: none; margin-right: 25px;">Are you sure?</p>
@@ -38,14 +38,16 @@
         <p><%= item.name %></p>
         <p><%= item.price %></p>
         <p class="quantity"><span class="circle <%= item.quantity < 4 ? 'red-circle' : 'green-circle' %>"></span><%= item.quantity %></p>
-        <form action="/category/move/<%= item.id %>" method="post" style="margin-left: auto; grid-column: 4/-1;">
+        <form action="/category/move/<%= item.id %>" method="post" style="grid-column: 4/-1;">
           <div class="dropdown">
             <input type="hidden" name="catId" id="catId">
             <input class="search" name="category" id="myInput" type="text" oninput="filterCategories(<%= i += 1 %>)"
               placeholder=" 🔍 Search" autocomplete="off">
             <ul class="search-list"></ul>  
-            <button class="add-update-btn" type="submit">➕ Add</button>
-            <a class="delete-btn" style="width: 17%; font-size: 1.3em; padding: 2px;" href="/item/delete/<%= item.id %>">🗑️</a>
+            <div style="min-width: 135px;">
+              <button class="add-update-btn" type="submit">➕ Add</button>
+              <a class="delete-btn" href="/item/delete/<%= item.id %>">Delete</a>
+            </div>
           </div>
         </form>
       </li>

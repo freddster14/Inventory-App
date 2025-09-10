@@ -1,5 +1,6 @@
 .start-multiple {
   height: 34px;
+  width: 200px;
 }
 
 .multi-select-toolbar {
@@ -9,7 +10,8 @@
 }
 
 .multi-select-toolbar button {
-  padding: 9px;
+  padding: 8px;
+  max-width: 130px;
 }
 
 .multi-search {
