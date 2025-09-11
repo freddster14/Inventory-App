@@ -1,9 +1,7 @@
 <h1>Edit Category</h1>
 <form action="/category/edit/<%= category.id %>" method="post" class="form-view">
-  <div style="margin: 16px 0px;">
     <label for="category"><span style="color: red;">*</span>Name:</label>
-    <input type="text" name="name" id="category" value="<%= category.name %>">
-  </div>
+    <input style="margin-bottom: 6px;" type="text" name="name" id="category" value="<%= category.name %>">
     <button type="submit" class="add-update-btn">UPDATE CATEGORY</button>
     <button class="cancel-btn" type="button" onclick="history.back()">CANCEL</button>
 </form>

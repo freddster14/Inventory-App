@@ -2,11 +2,11 @@
   <%= category.name %>
 </h1>
 <div class="form-view">
-  <p ">Deleting this category will move all of the <span>
+  <p style="margin: 0px;" >Deleting this category will move all of the <span>
       <%= length %>
     </span> item(s) inside it to "No Category".
   </p>
-  <div style="flex-direction: row; justify-content: space-between;">
+  <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 6px;">
     <form action="/category/delete/<%= category.id %>" method="post" class="form-box">
       <button class="delete-btn" type="submit">DELETE CATEGORY</button>
     </form>

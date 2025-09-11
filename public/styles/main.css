@@ -187,28 +187,29 @@ a:hover {
 }
 
 .form-view {
-  padding: 1px 14px;
+  padding: 16px 14px;
   display: flex;
   flex-direction: column;
   background-color: var(--box-background);
+  gap: 10px;
 }
 
-.form-view button {
-  margin-bottom: 10px;
+.form-view input {
+  margin-top: -5px;
+  padding-left: 7px;
+}
+
+
+.form-view button{
   width: 100%;
   max-width: 300px;
 }
 
-.form-box input {
-  font-size: 16px;
-  width: 100%;
-  max-width: 230px;
-}
 
 #category {
   font-size: 16px;
   width: 100%;
-  max-width: 230px;
+  max-width: 287px;
 }
 
 .add-update-btn, .delete-btn, .cancel-btn {

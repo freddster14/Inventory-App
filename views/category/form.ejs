@@ -1,10 +1,8 @@
 <h1>Create Category</h1>
 <div class="form-view">
-  <form action="/category/new" method="post" class="form-box" style="display: flex; flex-direction: column;">
-    <div style="margin: 16px 0px;">
-      <label for="category"><span style="color: red;">*</span>Name:</label>
-      <input type="text" name="name" id="category" placeholder="Ex. Footwear, Electronics, Toys, etc...">
-    </div>
+  <form action="/category/new" method="post" class="form-view"  style="padding: 0px;">
+    <label for="category"><span style="color: red;">*</span>Name:</label>
+    <input style="margin-bottom: 6px;" type="text" name="name" id="category" placeholder="Ex. Footwear, Electronics, Toys, etc...">
     <button type="submit" class="add-update-btn">ADD CATEGORY</button>
   </form>
   <button class="cancel-btn" type="button" onclick="history.back()">CANCEL</button>
