@@ -129,12 +129,20 @@ exports.moveItem = [
   validateCategory,
   async (req, res) => {
     const errors = validationResult(req);
-    const items = await db.getCategoryItems(1);
     if (!errors.isEmpty()) {
       const categories = await db.getCategories();
+      const page = parseInt(req.query.page, 10) || 1;
+      const limit = parseInt(req.query.limit, 10) || 12;
+      const items = await db.getCategoryItems(1, limit, page);
+      const totalPages = await db.getTotalPages(limit, 'items', 1);
+      const fn = (newQuery, query) => buildUrl(req, newQuery, 'category/1', query);
       return res.status(400).render('category/noCategory', {
         categories,
         items,
+        page,
+        limit,
+        totalPages,
+        buildUrl: fn,
         errors: errors.array(),
       });
     }
