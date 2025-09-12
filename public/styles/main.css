@@ -7,10 +7,11 @@
 }
 
 body,html {
-  margin: 0;
   padding: 0;
   font-family: 'TikTok Sans', sans-serif;
   height: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
 }
 
 a {
@@ -45,6 +46,8 @@ a:hover {
   align-items: center;
   padding-top: 20px;
   font-size: 1.1em;
+  border-left: 1px solid var(--body-background);
+  border-right: 1px solid var(--body-background);
 }
 
 #categories-link, #inventory-link, #no-category-link {
