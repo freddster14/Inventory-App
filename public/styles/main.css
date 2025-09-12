@@ -118,7 +118,7 @@ a:hover {
 .list {
   display: flex;
   flex-direction: column;
-  padding: 0px 10px;
+  padding: 0px 14px;
   margin: 0;
   background-color: var(--box-background);
   min-height: calc(54px * var(--limit));
@@ -203,6 +203,12 @@ a:hover {
 .form-view button{
   width: 100%;
   max-width: 300px;
+}
+
+.form-view input {
+  max-width: 287px;
+  width: 100%;
+  font-size: 16px;
 }
 
 

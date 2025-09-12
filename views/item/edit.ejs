@@ -1,6 +1,6 @@
 <h1>Edit Item:</h1>
-<form action="/item/edit/<%= item.id %>" method="post" class="form-box">
-  <div>
+<form action="/item/edit/<%= item.id %>" method="post" class="form-view">
+ 
     <label for="category">Category:</label>
     <div class="dropdown">
       <input type="hidden" name="catId" id="catId" value="<%= category.id %>">
@@ -14,11 +14,8 @@
     <label for="price"><span style="color: red;">*</span>Price:</label>
     <input type="number" name="price" id="price" step="0.01" value="<%= item.price %>" min="1">
     <label for="quantity">Quantity:</label>
-    <input type="number" name="quantity" id="quantity" value="<%= item.quantity %>">
-    <div style="flex-direction: row; justify-content: space-between;">
-      <button class="cancel-btn" type="button" onclick="history.back()">CANCEL</button>
-      <button class="add-update-btn" id="submit" type="submit">UPDATE ITEM</button>
-    </div>
-  </div>
+    <input style="margin-bottom: 6px; max-width: 60px;" type="number" name="quantity" id="quantity" value="<%= item.quantity %>">
+    <button class="add-update-btn" id="submit" type="submit">UPDATE ITEM</button>
+    <button class="cancel-btn" type="button" onclick="history.back()">CANCEL</button>
 </form>
 <%- include('../errors', { errors }); %>

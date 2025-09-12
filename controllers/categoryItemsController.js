@@ -11,7 +11,6 @@ exports.getCategories = async (req, res) => {
   if (totalPages < page) return res.redirect(`/category?page=${totalPages}&limit=${limit}`);
   const fn = (newQuery, query) => buildUrl(req, newQuery, 'category', query);
   const categories = await db.getCategoriesAndCount(limit, page);
-  console.log(categories);
   return res.render('category/default', {
     categories,
     page,

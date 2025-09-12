@@ -102,8 +102,9 @@
     const allList = document.querySelectorAll('.search-list');
     const searchInput = document.querySelectorAll('#myInput')[i];
     const catId = document.querySelectorAll('#catId')[i];
-    const inputValue = searchInput.value.toLowerCase();
+    const inputVal = searchInput.value.toLowerCase();
     const list = document.querySelectorAll('.search-list')[i];
+    if (inputVal === '') return list.innerHTML = '';
     // when input is unfocused clear list
     searchInput.addEventListener('blur', () => {
       setTimeout(() => {
@@ -113,7 +114,7 @@
 
     document.getElementById('catId').value = '';
     // search process
-    const filtered = categories.filter(category => category.name.toLowerCase().includes(inputValue));
+    const filtered = categories.filter(category => category.name.toLowerCase().includes(inputVal));
     appendCategories(filtered, searchInput, catId, list);
   };
   // add checkboxes (DOM)

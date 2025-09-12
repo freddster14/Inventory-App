@@ -1,6 +1,6 @@
 <h1>Create Item:</h1>
-<form action="/item/new" method="post" class="form-box">
-  <div>
+
+  <form action="/item/new" method="post" class="form-view" style="display: flex; flex-direction: column;">
     <% if (selectedCategory) { %>
       <label for="category">Category:</label>
       <input type="hidden" name="catId" value="<%= selectedCategory.id %>">
@@ -10,11 +10,10 @@
       <label for="category"><span style="color: red;">*</span>Category:</label>
       <div class="dropdown">
         <input type="hidden" name="catId" id="catId">
-        <input name="category" id="myInput" type="text" oninput="filterCategories()" placeholder=" 🔍 Search" autocomplete="off">
-        <ul style="margin-top: 22px;" class="search-list"></ul>
+        <input name="category" id="category" type="text"  oninput="filterCategories()" placeholder=" 🔍 Search" autocomplete="off">
+        <ul class="search-list" style="top: 5px; max-width: 300px;"></ul>
       </div>
     <% } %>
-    
     <label for="name"><span style="color: red;">*</span>Name:</label>
     <input type="text" name="name" id="name">
     <label for="info">Info:</label>
@@ -22,14 +21,12 @@
     <label for="price"><span style="color: red;">*</span>Price ($):</label>
     <input type="number" step="0.01" name="price" id="price" min="0">
     <label for="quantity">Quantity:</label>
-    <input type="number" name="quantity" id="quantity" value="1">
-    <div style="flex-direction: row; justify-content: space-between;">
-      <button class="cancel-btn" type="button" onclick="history.back()">CANCEL</button>
-      <button id="submit" class="add-update-btn" type="submit">ADD ITEM</button>
-    </div>
-  </div>
- 
-</form>
+    <input style="max-width: 60px;" type="number" name="quantity" id="quantity" value="1">
+    <button style="margin-top: 6px;" id="submit" class="add-update-btn" type="submit">ADD ITEM</button>
+    <button  class="cancel-btn" type="button" onclick="history.back()">CANCEL</button>
+
+  </form>
+
 <%- include('../errors', { errors }); %>
 <script>
   const categories = <%- JSON.stringify(categories) %>;
@@ -41,22 +38,6 @@
     }
   });
   const appendCategories = (filtered) => {
-    filtered.forEach(category => {
-      const li = document.createElement('li');
-      li.textContent = category.name;
-      li.addEventListener('click', () => {
-        document.getElementById('myInput').value = category.name;
-        document.getElementById('catId').value = category.id;
-        list.innerHTML = '';
-      })
-      list.appendChild(li);
-    });
-  };
-  const filterCategories = () => {
-    const searchInput = document.getElementById('myInput').value.toLowerCase();
-    document.getElementById('catId').value = '';
-    if (searchInput === '') return list.innerHTML = '';
-    const filtered = categories.filter(category => category.name.toLowerCase().includes(searchInput));
     list.innerHTML = '';
     if (filtered.length === 0) {
       const li = document.createElement('li');
@@ -64,6 +45,28 @@
       list.appendChild(li);
       return;
     }
+    filtered.forEach(category => {
+      const li = document.createElement('li');
+      li.textContent = category.name;
+      li.addEventListener('click', () => {
+        document.getElementById('category').value = category.name;
+        document.getElementById('catId').value = category.id;
+        list.innerHTML = '';
+      })
+      list.appendChild(li);
+    });
+  };
+  const filterCategories = () => {
+    const searchInput = document.getElementById('category');
+    const inputVal = searchInput.value.toLowerCase();
+    document.getElementById('catId').value = '';
+    if (inputVal === '') return list.innerHTML = '';
+    const filtered = categories.filter(category => category.name.toLowerCase().includes(inputVal));
+    searchInput.addEventListener('blur', () => {
+      setTimeout(() => {
+        list.innerHTML = '';
+      }, 300)
+    });
     appendCategories(filtered);
   };
 </script>
