@@ -153,9 +153,20 @@
   }
 
   function confirmationDelete() {
-    document.querySelector('.delete').style.display = 'none';
-    document.querySelector('.yes').style.display = 'block';
-    document.querySelector('.multiple').style.display = 'none';
-    document.querySelector('.confimation-text').style.display = 'block';
+    let res = '';
+    const checkboxes = document.querySelectorAll('.checkbox');
+    checkboxes.forEach((box, i) => {
+      if (box.checked) {
+        res += `${items[i].id}*`
+      }
+    })
+    if (res !== '') {
+      document.querySelector('.delete').style.display = 'none';
+      document.querySelector('.yes').style.display = 'block';
+      document.querySelector('.multiple').style.display = 'none';
+      document.querySelector('.confimation-text').style.display = 'block';
+    }
+
+
   }
 </script>
