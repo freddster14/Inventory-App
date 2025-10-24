@@ -1,5 +1,5 @@
 # Inventory-App
-Live Preview: [Click Here](https://inventory-app-pa84.onrender.com){:target="_blank"}
+Live Preview: [Click Here](https://inventory-app-pa84.onrender.com)
 
 ## Technologies Used
 
