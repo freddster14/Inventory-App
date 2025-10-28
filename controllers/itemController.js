@@ -1,4 +1,3 @@
-const db = require('../models/queries');
 const { validationResult } = require('express-validator');
 const { validateCategory, validateInfo, validateName } = require('../models/validators');
 const { buildUrl } = require('../models/helper-functions');
