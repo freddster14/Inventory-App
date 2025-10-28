@@ -17,6 +17,7 @@ async function execute(sql, params = []) {
 async function getPagination(sql, params, limit = 12, page = 1) {
   const offset = (page - 1) * limit;
   const newParams = [...params];
+  newParams.push(limit);
   newParams.push(offset);
   const { rows } = await pool.query(sql, newParams);
   return rows;
